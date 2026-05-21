@@ -1,0 +1,344 @@
+.header {
+    background: #0074c7;
+    color: white;
+    padding: 18px 40px;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+
+    /* CONTAINER */
+    .header-inner {
+        width: 100%;
+        max-width: 1400px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 40px;
+    }
+
+    /* =========================
+       LOGO
+    ========================= */
+    .header_logo {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+
+        img {
+            height: 60px;
+            width: auto;
+            display: block;
+        }
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+    &__nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+
+        flex-shrink: 0;
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: 0.2s;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    /* =========================
+       SEARCH BAR
+    ========================= */
+    .header_search {
+        flex: 1;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        gap: 12px;
+
+        max-width: 700px;
+        margin: 0 auto;
+
+        input {
+            flex: 1;
+
+            height: 48px;
+
+            padding: 0 18px;
+
+            border: none;
+            border-radius: 8px;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        button {
+            height: 48px;
+
+            padding: 0 22px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #00497c;
+            color: white;
+
+            font-weight: 500;
+
+            cursor: pointer;
+            transition: 0.2s;
+
+            white-space: nowrap;
+
+            &:hover {
+                background: #00365c;
+            }
+        }
+    }
+
+    /* =========================
+       BURGER
+    ========================= */
+    &__burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+
+        span {
+            width: 26px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+        }
+    }
+}
+
+/* =========================
+   ADMIN MENU
+========================= */
+.admin-menu {
+    position: relative;
+
+    .admin-btn {
+        background: transparent;
+        border: none;
+
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+
+        cursor: pointer;
+
+        padding: 8px 12px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .admin-dropdown {
+        position: absolute;
+        top: 42px;
+        right: 0;
+
+        background: white;
+
+        border-radius: 8px;
+        border: 1px solid #ddd;
+
+        padding: 10px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        min-width: 180px;
+
+        z-index: 2000;
+
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+        a {
+            text-decoration: none;
+            color: #333;
+
+            padding: 8px 10px;
+            border-radius: 6px;
+
+            transition: 0.2s;
+
+            &:hover {
+                background: #f5f5f5;
+            }
+        }
+    }
+}
+
+/* =========================
+    TABLETTE
+========================= */
+@media (max-width: 1100px) {
+
+    .header {
+        padding: 15px 25px;
+
+        .header-inner {
+            gap: 20px;
+        }
+
+        .header_logo img {
+            height: 50px;
+        }
+
+        .header_search {
+            max-width: 100%; /* 🔥 Correction */
+            width: 100%;     /* 🔥 Correction */
+
+            input {
+                height: 44px;
+            }
+
+            button {
+                height: 44px;
+                padding: 0 18px;
+            }
+        }
+
+        &__nav {
+            gap: 18px;
+
+            a {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+/* =========================
+    MOBILE
+========================= */
+@media (max-width: 780px) {
+    .header {
+        padding: 15px 20px;
+
+        .header-inner {
+            flex-wrap: wrap;
+            gap: 15px;
+
+            justify-content: center; /* 🔥 Ajout */
+            flex-direction: column;  /* 🔥 Correction CRITIQUE */
+            align-items: center;     /* 🔥 Ajout */
+        }
+
+
+        .header_logo {
+            justify-content: center;
+            width: 100%;
+        }
+
+        .header_search {
+            order: 3;
+
+            width: 100%;
+            max-width: 100%;
+
+            display: flex;
+            flex-direction: row;
+
+            input {
+                width: 100%;
+                flex: 1;
+            }
+
+            button {
+                padding: 0 16px;
+            }
+        }
+
+
+        /* BURGER */
+        &__burger {
+            display: flex;
+            margin-left: auto;
+        }
+
+        /* NAV MOBILE */
+        &__nav {
+            width: 100%;
+
+            display: none;
+            flex-direction: column;
+
+            background: #0060a3;
+
+            padding: 15px;
+            border-radius: 10px;
+
+            gap: 15px;
+
+            &.open {
+                display: flex;
+            }
+
+            a {
+                padding: 10px 0;
+            }
+        }
+    }
+
+    /* ADMIN MOBILE */
+    .admin-menu {
+        width: 100%;
+
+        .admin-dropdown {
+            position: static;
+
+            background: transparent;
+            border: none;
+            box-shadow: none;
+
+            padding: 0;
+
+            a {
+                color: white;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                }
+            }
+        }
+    }
+}
+
+/* =========================
+    PETIT MOBILE
+========================= */
+@media (max-width: 480px) {
+    .header_search input {
+        font-size: 14px;
+    }
+
+    .header_search button {
+        padding: 0 12px;
+        font-size: 14px;
+    }
+}

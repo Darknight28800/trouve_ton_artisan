@@ -1,0 +1,72 @@
+.artisans-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    /* Espacements entre sections */
+    section {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    h2 {
+        margin-top: 40px;
+        margin-bottom: 25px;
+    }
+
+    /* Barre de recherche */
+    .search-bar {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+
+        input {
+        flex: 1;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        }
+
+        button {
+        background: #0074c7;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: 0.25s ease;
+
+        &:hover {
+            background: #005fa3;
+            transform: translateY(-2px);
+        }
+        }
+    }
+
+    /* Grille artisans */
+    .artisans-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+    .artisans-page {
+        padding: 10px;
+
+        .search-bar {
+        flex-direction: column;
+        }
+
+        .artisans-list {
+        justify-content: center;
+        }
+    }
+}

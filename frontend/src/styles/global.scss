@@ -1,0 +1,108 @@
+@import "./variables";
+
+@import "./pages/home";
+@import "./pages/artisans";
+@import "./pages/artisan";
+@import "./pages/CategoriePage";
+@import "./pages/Legal";
+@import "./pages/Contact";
+@import "./pages/AdminMessages";
+@import "./pages/AdminCategories";
+@import "./pages/AdminSpecialites";
+@import "./pages/AdminDashboard";
+
+@import "./components/container";
+@import "./components/header";
+@import "./components/footer";
+@import "./components/ArtisanCard";
+@import "./components/CategorieCard";
+@import "./components/SectionTitle";
+@import "./components/AdminArtisanForm";
+@import "./components/AdminCategorieForm";
+@import "./components/AdminSpecialiteForm";
+
+
+
+
+@font-face {
+    font-family: "Graphik";
+    src: url("../fonts/Graphik-Regular-Trial.otf") format("opentype");
+    font-weight: 400;
+    }
+
+    @font-face {
+    font-family: "Graphik";
+    src: url("../fonts/Graphik-Medium-Trial.otf") format("opentype");
+    font-weight: 500;
+    }
+
+    @font-face {
+    font-family: "Graphik";
+    src: url("../fonts/Graphik-Bold-Trial.otf") format("opentype");
+    font-weight: 700;
+}
+
+
+body {
+    background-color: #f9f9f9;
+    font-family: "Graphik", Arial, sans-serif;
+    color: #333;
+    }
+
+    h1,
+    h2 {
+    font-weight: 600;
+    }
+
+    footer {
+    background: #0074c7;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+
+    a {
+        color: white;
+        text-decoration: underline;
+    }
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 40px auto;
+    max-width: 600px;
+    width: 100%;
+}
+
+    .search-input {
+    flex: 1;
+    padding: 12px 18px;
+    border: 2px solid #0074c7;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+    .search-button {
+    padding: 12px 20px;
+    background: #0074c7;
+    color: white;
+    border: 2px solid #0074c7;
+    border-radius: 0 8px 8px 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+        background: #005fa3;
+    }
+}
+
+*:focus {
+    outline: 3px solid #82b864;
+    outline-offset: 3px;
+}
+
+

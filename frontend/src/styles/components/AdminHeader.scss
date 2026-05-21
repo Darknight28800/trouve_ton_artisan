@@ -1,0 +1,49 @@
+.admin-header {
+    background: #1e1e1e;
+    color: white;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .left {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+
+        h2 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+
+            &:hover {
+                color: white;
+            }
+        }
+    }
+
+    .logout-btn,
+    .login-btn {
+        background: #e63946;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+        text-decoration: none;
+        display: inline-block;
+
+        &:hover {
+            background: #c62828;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+.section-title {
+    font-size: 26px;
+    margin: 40px 0 20px;
+    font-weight: 600;
+    color: #0074c7;
+    position: relative;
+    padding-bottom: 8px;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: #0074c7;
+        border-radius: 2px;
+    }
+}

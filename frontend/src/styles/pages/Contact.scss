@@ -1,0 +1,134 @@
+.contact-page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+
+    /* TITRE */
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #0074c7;
+        font-size: 32px;
+    }
+
+    /* SOUS-TITRE (artisan ciblé) */
+    .contact-target {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #333;
+
+        strong {
+            color: #0074c7;
+        }
+    }
+
+    /* FORMULAIRE */
+    form {
+        background: #f8f8f8;
+        padding: 25px;
+        border-radius: 12px;
+        border: 1px solid #ddd;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+
+        input,
+        textarea {
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            transition: 0.2s ease;
+
+            &:focus {
+                border-color: #0074c7;
+                box-shadow: 0 0 0 3px rgba(0,116,199,0.15);
+                outline: none;
+            }
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            background: #0074c7;
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            border: none;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s ease;
+
+            &:hover {
+                background: #005fa3;
+                transform: translateY(-2px);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+        }
+    }
+
+    /* MESSAGE DE SUCCÈS */
+    .success {
+        text-align: center;
+        padding: 15px;
+        background: #e6f3ff;
+        border: 1px solid #bcdcff;
+        border-radius: 8px;
+        color: #0074c7;
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+
+/* MODE TABLETTE — dès 1060px */
+@media (max-width: 1060px) {
+    .contact-page {
+        padding: 15px;
+
+        h1 {
+            font-size: 28px;
+        }
+
+        form {
+            padding: 22px;
+        }
+    }
+}
+
+/* MODE MOBILE — dès 780px */
+@media (max-width: 780px) {
+    .contact-page {
+        padding: 10px;
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .contact-target {
+            font-size: 16px;
+        }
+
+        form {
+            padding: 18px;
+
+            input,
+            textarea {
+                font-size: 15px;
+            }
+
+            button {
+                font-size: 16px;
+            }
+        }
+    }
+}

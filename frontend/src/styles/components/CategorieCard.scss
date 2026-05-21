@@ -1,0 +1,29 @@
+.categorie-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    width: 200px;
+    text-align: center;
+    transition: 0.25s ease;
+    cursor: pointer;
+
+    h3 {
+        font-size: 18px;
+        color: #333;
+        margin: 0;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        background: #f7faff;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .categorie-card {
+            margin: 0 auto;
+        }
+    }
+}
