@@ -1,55 +1,41 @@
-🎯 1. Présentation du projet
-TrouveTonArtisan est une application web permettant aux utilisateurs de :
+# 🛠️ TrouveTonArtisan — Application Web Fullstack
 
-rechercher un artisan
+TrouveTonArtisan est une application web permettant de rechercher facilement un artisan, filtrer par catégorie ou spécialité, consulter une fiche détaillée et envoyer un message via un formulaire de contact.  
+Le site est entièrement responsive, ergonomique et pensé pour une navigation fluide.
 
-filtrer par catégorie ou spécialité
+---
 
-consulter la fiche détaillée d’un artisan
+## 🎯 1. Fonctionnalités principales
 
-envoyer un message via un formulaire de contact
+- Recherche d’artisans  
+- Filtres par catégorie et spécialité  
+- Fiche artisan détaillée  
+- Formulaire de contact  
+- Pages légales complètes  
+- Responsive mobile / tablette / desktop  
 
-naviguer dans un site responsive, ergonomique et accessible
+---
 
-Le projet repose sur une architecture complète comprenant :
+## 🛠️ 2. Technologies utilisées
 
-un frontend React + Vite
+### Frontend
+- React  
+- React Router  
+- Axios  
+- SCSS modulaire  
+- Vite  
 
-un backend Node.js + Express + Sequelize
+### Backend
+- Node.js  
+- Express  
+- Sequelize  
+- MySQL / MariaDB  
 
-une base de données MySQL
+---
 
+## 📂 3. Structure du projet
 
-*************************************************************************************************************
-
-
-🛠️ 2. Technologies utilisées
-Frontend
-React
-
-React Router
-
-Axios
-
-SCSS (architecture modulaire)
-
-Vite
-
-Backend
-Node.js
-
-Express
-
-Sequelize
-
-MySQL / MariaDB
-
-
-*************************************************************************************************************
-
-
-📂 3. Structure du projet
-Code
+```
 /backend
   /config
   /controllers
@@ -67,207 +53,211 @@ Code
     App.jsx
     main.jsx
   index.html
+```
 
+---
 
-  *************************************************************************************************************
+## ⚙️ 4. Installation du projet
 
+### A. Cloner le projet
 
-⚙️ 4. Installation du projet
-A. Cloner le projet
-bash
+```bash
 git clone <ton-repo>
-cd projet
-🚀 5. Installation & lancement du backend
-Installer les dépendances
-bash
+cd trouve-ton-artisan
+```
+
+---
+
+## 🚀 5. Backend — Installation & lancement
+
+### Installer les dépendances
+
+```bash
 cd backend
 npm install
-Configurer la base de données
-Créer un fichier .env :
+```
 
-Code
+### Configurer la base de données
+
+Créer un fichier `.env` :
+
+```
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=
 DB_NAME=trouvetonartisan
 DB_DIALECT=mysql
-PORT=5000
-Lancer le serveur
-bash
+PORT=5001
+```
+
+### Lancer le serveur
+
+```bash
 npm start
-Backend disponible sur :
+```
+
+Backend disponible sur :  
 👉 http://localhost:5001
 
+---
 
-*************************************************************************************************************
+## 💻 6. Frontend — Installation & lancement
 
+### Installer les dépendances
 
-💻 6. Installation & lancement du frontend
-Installer les dépendances
-bash
+```bash
 cd frontend
 npm install
-Lancer le serveur
-bash
+```
+
+### Lancer le serveur
+
+```bash
 npm run dev
-Frontend disponible sur :
+```
+
+Frontend disponible sur :  
 👉 http://localhost:5173
 
+---
 
-*************************************************************************************************************
+## 🔗 7. Routes API
 
+### Artisans
+- GET /artisans  
+- GET /artisans/top  
+- GET /artisans/:id  
 
-🔗 7. Routes API
-Artisans
-GET /artisans
+### Catégories
+- GET /categories  
 
-GET /artisans/top
+### Spécialités
+- GET /specialites  
 
-GET /artisans/:id
+---
 
-Catégories
-GET /categories
+## 📱 8. Fonctionnalités détaillées
 
-Spécialités
-GET /specialites
+### Page d’accueil
+- Étapes explicatives  
+- Artisans recommandés  
+- Artisans du mois  
+- Catégories  
 
+### Page liste artisans
+- Recherche  
+- Filtres  
+- Affichage dynamique  
 
-*************************************************************************************************************
+### Page artisan
+- Détails  
+- Image  
+- Note  
+- Spécialité  
+- Localisation  
+- Formulaire de contact  
 
+### Pages légales
+- Mentions légales  
+- Données personnelles  
+- Accessibilité  
+- Cookies  
 
-📱 8. Fonctionnalités du site
-Page d’accueil
-étapes explicatives
+### Responsive complet
+- Mobile  
+- Tablette  
+- Desktop  
 
-artisans recommandés
+---
 
-artisans du mois
+## 🎨 9. Design & UX
 
-catégories
+- Thème bleu professionnel  
+- Cartes avec ombres modernes  
+- Boutons interactifs  
+- Sections aérées  
+- Navigation intuitive  
 
-Page liste artisans
-recherche
+---
 
-filtres
+## 🎨 9.1 Maquette Figma (Prototype interactif)
 
-affichage dynamique
+Vous pouvez consulter la maquette complète du projet ici :
 
-Page artisan
-détails
+👉 **Prototype Figma :**  
+https://www.figma.com/proto/IuVMTOHAupiAfh1FKt04XA/Projet-Maquette-ProBeat?node-id=290-1132&t=xFWn4ah0qnxDh9sL-1
 
-image
+Ce lien permet de :
+- naviguer dans les écrans comme un vrai site  
+- visualiser le design responsive  
+- comprendre la structure UX 
 
-note
+---
 
-spécialité
+## 🧪 10. Tests réalisés
 
-localisation
+- Vérification console (aucune erreur)  
+- Vérification API (toutes les routes OK)  
+- Vérification responsive  
+- Vérification navigation  
+- Vérification cohérence visuelle  
 
-formulaire de contact intégré
+---
 
-Pages légales
-mentions légales
+## ✔ 10.1 Validation W3C
 
-données personnelles
+### HTML
+Le fichier `index.html` a été validé via le validateur officiel du W3C.  
+Aucune erreur n’a été détectée.
 
-accessibilité
+📸 *Capture d’écran de la validation HTML (W3C)*  
+*(voir PDF ou dossier /captures)*
 
-cookies
+### CSS
+Le fichier CSS compilé a été validé via le validateur CSS du W3C.  
+Aucune erreur n’a été détectée.
 
-Header + Footer
-identiques sur toutes les pages
+📸 *Capture d’écran de la validation CSS (W3C)*  
+*(voir dossier W3C)*
 
-Responsive complet
-mobile
-
-tablette
-
-desktop
-
-
-*************************************************************************************************************
-
-
-🎨 9. Design & UX
-Thème bleu professionnel
-
-Cartes avec ombres modernes
-
-Boutons interactifs
-
-Sections aérées
-
-Navigation intuitive
-
-Responsive optimisé
-
-
-*************************************************************************************************************
-
-
-🧪 10. Tests réalisés
-Vérification console (aucune erreur)
-
-Vérification API (toutes les routes OK)
-
-Vérification responsive
-
-Vérification navigation
-
-Vérification cohérence visuelle
-
-
-*************************************************************************************************************
+---
 
 
-📸 11. Captures d’écran
-(À insérer dans ton PDF ou ton dépôt CEF)
+## 📸 11. Captures d’écran
 
-Version desktop
+*(À insérer dans ton PDF ou ton dépôt CEF)*
 
-Version mobile
+- Version desktop  
+- Version mobile  
+- Page artisans  
+- Page artisan  
+- Page contact  
 
-Page artisans
+---
 
-Page artisan
+## 📦 12. Livrables
 
-Page contact
-
-
-*************************************************************************************************************
-
-
-📦 12. Livrables
 Le ZIP final doit contenir :
 
-/frontend
+- /frontend  
+- /backend  
+- README.md  
+- Captures d’écran  
+- PDF explicatif (si demandé)  
 
-/backend
+---
 
-README.md
+## 🏁 13. Conclusion
 
-captures d’écran
-
-PDF explicatif (si demandé)
-
-
-*************************************************************************************************************
-
-
-🏁 13. Conclusion
 Le projet TrouveTonArtisan répond à l’ensemble des exigences du brief :
 
-site complet
+- Site complet  
+- API fonctionnelle  
+- Responsive  
+- Design cohérent  
+- Code propre  
+- Pages légales  
+- Formulaire de contact  
 
-API fonctionnelle
-
-responsive
-
-design cohérent
-
-code propre
-
-pages légales
-
-formulaire de contact
+---
 
