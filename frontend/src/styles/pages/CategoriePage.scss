@@ -1,0 +1,84 @@
+.categorie-page {
+    margin-top: 120px; // ajuste selon la hauteur de ton header
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+
+    /* TITRE */
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: #003b73;
+        text-align: center;
+    }
+
+    /* GRILLE DES ARTISANS */
+    .artisans-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        justify-items: center; /* centre les cards */
+    }
+
+    /* CARD ARTISAN */
+    .artisan-card {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 1rem 1.2rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e3e6ee;
+        width: 100%;
+        max-width: 260px; /* empêche tout débordement */
+        box-sizing: border-box;
+
+        h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
+            color: #222;
+            text-align: center;
+        }
+
+        p {
+            margin: 0.1rem 0;
+            color: #555;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+    }
+
+    /* MODE TABLETTE — dès 1060px */
+    @media (max-width: 1060px) {
+        .artisans-list {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+        }
+
+        .artisan-card {
+            max-width: 240px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+        }
+    }
+
+    /* MODE MOBILE — dès 780px */
+    @media (max-width: 780px) {
+        padding: 15px;
+
+        h1 {
+            font-size: 1.6rem;
+            text-align: center;
+        }
+
+        .artisans-list {
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+        }
+
+        .artisan-card {
+            max-width: 320px;
+            width: 100%;
+        }
+    }
+}

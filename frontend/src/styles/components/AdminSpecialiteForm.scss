@@ -1,0 +1,56 @@
+.admin-specialite-form {
+    h2 {
+        margin-bottom: 15px;
+        font-size: 22px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        label {
+        font-weight: 600;
+        }
+
+        input,
+        select {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        }
+
+        .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+
+        .btn-save {
+            background: #28a745;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+            background: #1e7e34;
+            }
+        }
+
+        .btn-cancel {
+            background: #6c757d;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+            background: #545b62;
+            }
+        }
+        }
+    }
+}

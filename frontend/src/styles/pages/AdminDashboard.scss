@@ -1,0 +1,35 @@
+.admin-dashboard {
+    padding: 40px;
+
+    h1 {
+        margin-bottom: 30px;
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+
+        h2 {
+            font-size: 40px;
+            margin: 0;
+            color: #0074c7;
+        }
+
+        p {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #555;
+        }
+    }
+}

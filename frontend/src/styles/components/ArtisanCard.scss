@@ -1,0 +1,33 @@
+.artisan-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    width: 260px;
+    transition: 0.25s ease;
+    cursor: pointer;
+
+    h3 {
+        margin-bottom: 10px;
+        font-size: 20px;
+        color: #0074c7;
+    }
+
+    p {
+        margin: 4px 0;
+        color: #555;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .artisan-card {
+            margin: 0 auto;
+        }
+    }
+
+}
