@@ -53,18 +53,18 @@ sequelize.authenticate()
 // SERVE REACT FRONTEND
 // ------------------------------
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
-const frontendPath = path.join(__dirname, "../frontend/dist");
+// const frontendPath = path.join(__dirname, "../frontend/dist");
 
 // Sert les fichiers statiques du build React
-app.use(express.static(frontendPath));
+// app.use(express.static(frontendPath));
 
 // Catch-all : renvoie index.html pour toutes les routes non API
-app.use((req, res) => {
-    res.sendFile(path.join(frontendPath, "index.html"));
-});
+// app.use((req, res) => {
+//     res.sendFile(path.join(frontendPath, "index.html"));
+// });
 
 // ------------------------------
 // LANCEMENT SERVEUR
