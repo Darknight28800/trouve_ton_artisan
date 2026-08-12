@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import "../styles/pages/CategoriePage.scss";
 
 // On importe TON composant card
@@ -13,14 +13,14 @@ export default function CategoriePage() {
 
     useEffect(() => {
         // Récupère la catégorie
-        axios
-            .get(`http://localhost:5001/api/categories/${id}`)
+        api
+            .get(`/categories/${id}`)
             .then((res) => setCategorie(res.data))
             .catch((err) => console.error(err));
 
         // Récupère les artisans liés à cette catégorie
-        axios
-            .get(`http://localhost:5001/api/categories/${id}/artisans`)
+        api
+            .get(`/categories/${id}/artisans`)
             .then((res) => setArtisans(res.data))
             .catch((err) => console.error(err));
     }, [id]);

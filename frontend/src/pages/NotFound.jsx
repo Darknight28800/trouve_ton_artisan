@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function NotFound() {
 
@@ -26,9 +27,9 @@ export default function NotFound() {
             <h1>Page non trouvée</h1>
             <p>La page que vous cherchez n'existe pas.</p>
 
-            <a href="/" className="btn btn-primary mt-3">
+            <Link to="/" className="btn btn-primary mt-3">
                 Retour à l'accueil
-            </a>
+            </Link>
         </div>
     );
 }

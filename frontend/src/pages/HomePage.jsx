@@ -23,8 +23,8 @@ export default function HomePage() {
     }, []);
 
     useEffect(() => {
-        api.get("/artisans/top").then((res) => setTopArtisans(res.data));
-        api.get("/categories").then((res) => setCategories(res.data));
+        api.get("/artisans/top").then((res) => setTopArtisans(res.data)).catch((err) => console.error(err));
+        api.get("/categories").then((res) => setCategories(res.data)).catch((err) => console.error(err));
     }, []);
 
     return (

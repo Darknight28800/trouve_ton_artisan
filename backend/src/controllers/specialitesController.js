@@ -5,7 +5,7 @@ export const getSpecialites = async (req, res) => {
         const specialites = await Specialite.findAll();
         res.json(specialites);
     } catch (error) {
-        console.error(err);
+        console.error(error);
         res.status(500).json({ error: "Erreur serveur" });
 
     }

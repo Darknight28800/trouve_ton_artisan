@@ -2,6 +2,7 @@ import express from "express";
 import { getAllMessages } from "../controllers/messageController.js";
 import verifyToken from "../middleware/verifyToken.js";
 import isAdmin from "../middleware/isAdmin.js";
+import { ContactMessage } from "../models/index.js";
 
 const router = express.Router();
 

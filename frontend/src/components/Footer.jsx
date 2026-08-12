@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
     return (
         <footer>
             <p>
-                <a href="/mentions-legales">Mentions légales</a> •
-                <a href="/donnees-personnelles">Données personnelles</a> •
-                <a href="/accessibilite">Accessibilité</a> •
-                <a href="/cookies">Cookies</a>
+                <Link to="/mentions-legales">Mentions légales</Link> •
+                <Link to="/donnees-personnelles">Données personnelles</Link> •
+                <Link to="/accessibilite">Accessibilité</Link> •
+                <Link to="/cookies">Cookies</Link>
             </p>
             <p>
                 101 cours Charlemagne<br />

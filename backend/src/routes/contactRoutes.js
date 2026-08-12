@@ -2,6 +2,7 @@ import express from "express";
 import { ContactMessage, Artisan } from "../models/index.js";
 import verifyToken from "../middleware/verifyToken.js";
 import isAdmin from "../middleware/isAdmin.js";
+import { sendContactMessage } from "../controllers/contactController.js";
 
 const router = express.Router();
 
@@ -26,30 +27,8 @@ router.get("/", verifyToken, isAdmin, async (req, res) => {
     }
 });
 
-// 🟩 Envoi d’un message depuis le formulaire public
-router.post("/", async (req, res) => {
-    try {
-        const { nom, prenom, email, telephone, message, artisanId } = req.body;
-
-        if (!nom || !email || !message) {
-            return res.status(400).json({ error: "Champs requis manquants" });
-        }
-
-        const newMessage = await ContactMessage.create({
-            nom,
-            prenom,
-            email,
-            telephone,
-            message,
-            artisanId
-        });
-
-        res.status(201).json(newMessage);
-    } catch (error) {
-        console.error("Erreur POST /contact :", error);
-        res.status(500).json({ error: "Erreur serveur" });
-    }
-});
+// 🟩 Envoi d’un message depuis le formulaire public (enregistre + notifie l'artisan par email)
+router.post("/", sendContactMessage);
 
 // 🟥 SUPPRESSION D’UN MESSAGE (ADMIN)
 router.delete("/:id", verifyToken, isAdmin, async (req, res) => {

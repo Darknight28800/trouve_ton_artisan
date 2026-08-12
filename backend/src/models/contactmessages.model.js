@@ -24,13 +24,5 @@ export default (sequelize) => {
         }
     });
 
-    ContactMessage.associate = (models) => {
-        ContactMessage.belongsTo(models.Artisan, {
-            foreignKey: "artisanId",
-            as: "Artisan",
-            onDelete: "CASCADE"
-        });
-    };
-
     return ContactMessage;
 };

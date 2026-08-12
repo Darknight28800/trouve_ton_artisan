@@ -19,9 +19,9 @@ router.get("/:id", getArtisanById);
 // 🟥 ROUTES ADMIN (sécurisées)
 router.post("/", verifyToken, isAdmin, async (req, res) => {
     try {
-        const { nom, email, telephone, specialiteId } = req.body;
+        const { nom, email, telephone, specialite_id } = req.body;
 
-        if (!nom || !email || !telephone || !specialiteId) {
+        if (!nom || !email || !telephone || !specialite_id) {
             return res.status(400).json({ error: "Champs manquants" });
         }
 
@@ -29,7 +29,7 @@ router.post("/", verifyToken, isAdmin, async (req, res) => {
             nom,
             email,
             telephone,
-            specialiteId
+            specialite_id
         });
 
         res.status(201).json(newArtisan);
@@ -43,7 +43,7 @@ router.post("/", verifyToken, isAdmin, async (req, res) => {
 router.put("/:id", verifyToken, isAdmin, async (req, res) => {
     try {
         const { id } = req.params;
-        const { nom, email, telephone, specialiteId } = req.body;
+        const { nom, email, telephone, specialite_id } = req.body;
 
         const artisan = await Artisan.findByPk(id);
         if (!artisan) {
@@ -53,7 +53,7 @@ router.put("/:id", verifyToken, isAdmin, async (req, res) => {
         artisan.nom = nom;
         artisan.email = email;
         artisan.telephone = telephone;
-        artisan.specialiteId = specialiteId;
+        artisan.specialite_id = specialite_id;
 
         await artisan.save();
 

@@ -23,7 +23,7 @@ INSERT INTO specialite (nom, categorie_id) VALUES
 ('Toiletteur', 4),
 ('Webdesign', 4);
 
-INSERT INTO artisan (nom, note, ville, a_propos, email, site_web, [TOP], specialite_id) VALUES
+INSERT INTO artisan (nom, note, ville, a_propos, email, site_web, `top`, specialite_id) VALUES
 ('Boucherie Dumont', 4.5, 'Lyon', 'Lorem ipsum...', 'boucherie.dumond@gmail.com', NULL, TRUE, 1),
 ('Au pain chaud', 4.8, 'Montélimar', 'Lorem ipsum...', 'aupainchaud@hotmail.com', NULL, TRUE, 2),
 ('Chocolaterie Labbé', 4.9, 'Lyon', 'Lorem ipsum...', 'chocolaterie-labbe@gmail.com', 'https://chocolaterie-labbe.fr', TRUE, 3),

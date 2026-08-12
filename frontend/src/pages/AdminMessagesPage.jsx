@@ -8,11 +8,7 @@ export default function AdminMessages() {
     const [selectedMessage, setSelectedMessage] = useState(null);
 
     useEffect(() => {
-        api.get("/contact", {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-        })
+        api.get("/contact")
         .then((res) => setMessages(res.data))
         .catch(err => console.error("Erreur GET /contact :", err.response?.data || err));
     }, []);

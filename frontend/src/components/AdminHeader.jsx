@@ -6,6 +6,7 @@ export default function AdminHeader() {
 
     function handleLogout() {
         localStorage.removeItem("token");
+        localStorage.removeItem("role");
         window.location.href = "/admin/login";
     }
 
@@ -26,7 +27,7 @@ export default function AdminHeader() {
                 </button>
             ) : (
                 /* Sinon → bouton connexion */
-                <Link to="/login" className="login-btn">
+                <Link to="/admin/login" className="login-btn">
                     Connexion
                 </Link>
             )}

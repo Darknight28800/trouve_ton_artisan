@@ -225,7 +225,7 @@ Aucune erreur n’a été détectée.
 
 ## 📸 11. Captures d’écran
 
-*(À insérer dans ton PDF ou ton dépôt CEF)*
+*(À insérer dans ton PDF ou ton dépôt)*
 
 - Version desktop  
 - Version mobile  
