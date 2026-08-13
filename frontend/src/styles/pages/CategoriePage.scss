@@ -6,11 +6,6 @@
     padding: 50px 20px 60px;
     position: relative;
     z-index: 1;
-    border-radius: 28px;
-
-    background:
-        radial-gradient(circle at 15% 0%, color-mix(in srgb, var(--cat-accent) 45%, transparent), transparent 60%),
-        radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--cat-accent2) 35%, transparent), transparent 55%);
 
     h1 {
         font-size: 2rem;

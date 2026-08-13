@@ -25,15 +25,27 @@ export default function CategoriePage() {
             .catch((err) => console.error(err));
     }, [id]);
 
+    // Applique la teinte de la catégorie au fond de toute la page (body),
+    // et la retire en quittant la page.
+    useEffect(() => {
+        if (!categorie) return;
+
+        const theme = getCategoryTheme(categorie.nom);
+        document.body.style.setProperty("--cat-accent", theme.accent);
+        document.body.style.setProperty("--cat-accent2", theme.accent2);
+        document.body.classList.add("category-theme");
+
+        return () => {
+            document.body.classList.remove("category-theme");
+            document.body.style.removeProperty("--cat-accent");
+            document.body.style.removeProperty("--cat-accent2");
+        };
+    }, [categorie]);
+
     if (!categorie) return <p className="loading">Chargement...</p>;
 
-    const theme = getCategoryTheme(categorie.nom);
-
     return (
-        <Container
-            className="categorie-page"
-            style={{ "--cat-accent": theme.accent, "--cat-accent2": theme.accent2 }}
-        >
+        <Container className="categorie-page">
             <h1>{categorie.nom}</h1>
 
             {artisans.length === 0 ? (

@@ -94,6 +94,25 @@ body.public-theme {
     }
 }
 
+/* Page catégorie : le fond entier reprend la teinte de la catégorie
+   consultée (--cat-accent / --cat-accent2 posées sur <body> par CategoriePage). */
+body.public-theme.category-theme {
+    background: linear-gradient(
+        160deg,
+        color-mix(in srgb, var(--cat-accent) 55%, #1e1b3a) 0%,
+        color-mix(in srgb, var(--cat-accent2) 55%, #1e1b3a) 60%,
+        #1e1b3a 100%
+    );
+
+    &::before {
+        background: color-mix(in srgb, var(--cat-accent) 45%, transparent);
+    }
+
+    &::after {
+        background: color-mix(in srgb, var(--cat-accent2) 40%, transparent);
+    }
+}
+
 /* Utilitaire "vitre" réutilisable sur le thème public */
 .glass-panel {
     @include glass-panel();
