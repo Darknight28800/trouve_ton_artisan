@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Plateforme de mise en relation avec des artisans d'Eure-et-Loir — démo interactive de portfolio.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧰</text></svg>">
+<title>Trouve Ton Artisan</title>
+<style>
+  :root {
+    --bg-1: #5b21b6;
+    --bg-2: #4c1d95;
+    --bg-3: #3730a3;
+    --bg-4: #1e3a8a;
+    --accent-violet: #7c3aed;
+    --accent-indigo: #4338ca;
+    --accent-pink: #ec4899;
+    --accent-blue: #3b82f6;
+    --text: #ffffff;
+    --text-dim: rgba(255,255,255,0.82);
+    --text-faint: rgba(255,255,255,0.62);
+    --glass-bg: rgba(255,255,255,0.10);
+    --glass-bg-strong: rgba(255,255,255,0.17);
+    --glass-border: rgba(255,255,255,0.22);
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-pill: 999px;
+    --cat-a: var(--accent-violet);
+    --cat-b: var(--accent-indigo);
+    --font-display: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --font-body: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--text);
+    background:
+      radial-gradient(circle at 12% 8%, rgba(236,72,153,0.30), transparent 42%),
+      radial-gradient(circle at 92% 88%, rgba(59,130,246,0.26), transparent 45%),
+      linear-gradient(160deg, var(--bg-1) 0%, var(--bg-2) 22%, var(--bg-3) 55%, var(--bg-4) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img, svg { max-width: 100%; display: block; }
+
+  h1, h2, h3 { text-wrap: balance; margin: 0; color: var(--text); }
+
+  a { color: inherit; }
+
+  button { font-family: inherit; }
+
+  ::selection { background: var(--accent-violet); color: white; }
+
+  *:focus-visible {
+    outline: 2px solid #fef08a;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+  }
+
+  /* ---------- layout shells ---------- */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- demo ribbon ---------- */
+  .demo-ribbon {
+    background: rgba(0,0,0,0.28);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-dim);
+    padding: 8px 16px;
+    position: relative;
+    z-index: 30;
+  }
+  .demo-ribbon strong { color: #fef08a; font-weight: 600; }
+  .demo-ribbon a { color: #bfdbfe; text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ---------- header ---------- */
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .logo { display: flex; flex-direction: column; line-height: 1.15; flex-shrink: 0; }
+  .logo strong { font-size: 19px; font-weight: 800; letter-spacing: -0.01em; }
+  .logo span {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: linear-gradient(135deg, #f0abfc, #93c5fd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .header-search {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    max-width: 480px;
+  }
+  .header-search input {
+    flex: 1;
+    height: 42px;
+    padding: 0 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.14);
+    color: white;
+    font-size: 14px;
+  }
+  .header-search input::placeholder { color: rgba(255,255,255,0.65); }
+  nav.main-nav { display: flex; align-items: center; gap: 22px; margin-left: auto; flex-shrink: 0; }
+  nav.main-nav button.navlink {
+    background: none; border: none; color: white; font-size: 14.5px; font-weight: 600;
+    cursor: pointer; padding: 6px 2px; opacity: 0.88;
+  }
+  nav.main-nav button.navlink:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+  .admin-pill {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.10); border: 1px solid var(--glass-border);
+    padding: 6px 14px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600;
+    cursor: pointer; color: white;
+  }
+  .admin-pill:hover { background: rgba(255,255,255,0.18); }
+
+  @media (max-width: 860px) {
+    .header-inner { flex-wrap: wrap; }
+    .header-search { order: 3; max-width: 100%; width: 100%; }
+    nav.main-nav { display: none; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero { text-align: center; padding: 76px 24px 56px; position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(30px, 4.6vw, 46px); font-weight: 800; letter-spacing: -0.015em; margin-bottom: 14px; }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, #f0abfc, #93c5fd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero .sub { font-size: 18px; color: var(--text-dim); margin-bottom: 36px; }
+
+  .hero-search {
+    display: flex; gap: 10px; align-items: center;
+    max-width: 700px; margin: 0 auto 44px; padding: 10px;
+    border-radius: var(--radius-pill) !important;
+  }
+  .hero-search select, .hero-search input {
+    flex: 1; height: 50px; padding: 0 18px; border: none;
+    border-radius: var(--radius-pill); background: rgba(255,255,255,0.92);
+    color: #221a3a; font-size: 15px;
+  }
+  .hero-search button {
+    height: 50px; padding: 0 28px; border: none; border-radius: var(--radius-pill);
+    background: linear-gradient(135deg, var(--accent-violet), var(--accent-indigo));
+    color: white; font-weight: 700; font-size: 15px; cursor: pointer; white-space: nowrap;
+  }
+  .hero-search button:hover { filter: brightness(1.1); }
+
+  @media (max-width: 640px) {
+    .hero-search { flex-direction: column; border-radius: 22px !important; }
+    .hero-search select, .hero-search input, .hero-search button { width: 100%; }
+  }
+
+  .stats { display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; max-width: 900px; margin: 0 auto; }
+  .stat-card { flex: 1; min-width: 190px; padding: 22px; text-align: center; }
+  .stat-card .icon { font-size: 26px; display: block; margin-bottom: 6px; }
+  .stat-card .value {
+    display: block; font-size: 30px; font-weight: 800;
+    font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  }
+  .stat-card .label { display: block; font-size: 13px; color: var(--text-faint); margin-top: 3px; }
+
+  /* ---------- generic section ---------- */
+  main { position: relative; z-index: 1; }
+  section.block { max-width: 1200px; margin: 0 auto; padding: 56px 24px; }
+  section.block h2 { font-size: 26px; font-weight: 800; text-align: center; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .section-sub { text-align: center; color: var(--text-faint); margin-bottom: 30px; font-size: 15px; }
+
+  /* ---------- artisan cards ---------- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; }
+  .acard { overflow: hidden; transition: transform .2s ease; }
+  .acard:hover { transform: translateY(-5px); }
+  .acard .visual {
+    height: 150px; display: flex; align-items: center; justify-content: center; font-size: 56px;
+  }
+  .acard .body { padding: 16px 18px 18px; }
+  .acard h3 { font-size: 17px; margin-bottom: 5px; }
+  .acard .ville { font-size: 13.5px; color: var(--text-dim); margin: 0 0 6px; }
+  .stars { color: #fbbf24; letter-spacing: 1px; font-size: 13px; }
+  .stars .off { color: rgba(255,255,255,0.28); }
+  .acard .meta { font-size: 13px; color: var(--text-faint); margin: 6px 0 14px; }
+  .acard .actions { display: flex; gap: 8px; }
+  .acard .actions button {
+    flex: 1; padding: 9px 10px; border-radius: var(--radius-pill); font-weight: 700; font-size: 13px;
+    cursor: pointer; border: 1px solid transparent;
+  }
+  .btn-ghost { background: transparent; border-color: var(--glass-border) !important; color: white; }
+  .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+  .btn-fill { background: linear-gradient(135deg, var(--accent-violet), var(--accent-indigo)); color: white; }
+  .btn-fill:hover { filter: brightness(1.1); }
+
+  /* ---------- categories ---------- */
+  .cat-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .cat-pill {
+    display: flex; align-items: center; gap: 8px;
+    padding: 13px 22px; border-radius: var(--radius-md); font-weight: 700; font-size: 15px;
+    cursor: pointer; color: white; border: 1px solid;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--pa) 35%, transparent), color-mix(in srgb, var(--pb) 35%, transparent));
+    border-color: color-mix(in srgb, var(--pa) 55%, white 20%);
+    transition: transform .15s ease, background .2s ease;
+  }
+  .cat-pill:hover { transform: translateY(-2px); background: linear-gradient(135deg, color-mix(in srgb, var(--pa) 50%, transparent), color-mix(in srgb, var(--pb) 50%, transparent)); }
+  .cat-pill.active { outline: 2px solid white; }
+
+  /* ---------- filtered grid section (retint by category) ---------- */
+  #tous-artisans {
+    border-radius: 28px;
+    transition: background .4s ease;
+    background: transparent;
+  }
+  #tous-artisans.tinted {
+    background:
+      radial-gradient(circle at 15% 0%, color-mix(in srgb, var(--cat-a) 40%, transparent), transparent 60%),
+      radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--cat-b) 32%, transparent), transparent 55%);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+  .filter-info {
+    display: none;
+    align-items: center; justify-content: center; gap: 12px;
+    margin-bottom: 24px; font-size: 14px; color: var(--text-dim);
+  }
+  .filter-info.show { display: flex; }
+  .filter-info button {
+    background: rgba(255,255,255,0.14); border: 1px solid var(--glass-border); color: white;
+    border-radius: var(--radius-pill); padding: 5px 14px; font-size: 13px; cursor: pointer; font-weight: 600;
+  }
+  .empty-msg { text-align: center; color: var(--text-faint); padding: 30px 0; }
+
+  /* ---------- steps / features ---------- */
+  .steps { display: flex; gap: 20px; flex-wrap: wrap; }
+  .step { flex: 1; min-width: 200px; padding: 24px 20px; text-align: center; }
+  .step .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 50%; margin-bottom: 12px; font-weight: 800; font-size: 14px;
+    background: linear-gradient(135deg, var(--accent-violet), var(--accent-indigo));
+    font-family: var(--font-mono);
+  }
+  .step p { margin: 0; font-size: 14.5px; color: var(--text-dim); }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
+  .feature { display: flex; gap: 16px; padding: 24px; }
+  .feature .fi { font-size: 26px; flex-shrink: 0; }
+  .feature h3 { font-size: 17px; margin-bottom: 5px; }
+  .feature p { margin: 0; font-size: 14.5px; color: var(--text-dim); line-height: 1.55; }
+
+  /* ---------- contact ---------- */
+  .contact-box { max-width: 620px; margin: 0 auto; padding: 30px; }
+  .contact-box .target { text-align: center; font-size: 14.5px; color: var(--text-dim); margin-bottom: 18px; }
+  .contact-box .target strong { color: white; }
+  form.demo-form { display: flex; flex-direction: column; gap: 14px; }
+  form.demo-form input, form.demo-form textarea {
+    padding: 13px 15px; border-radius: 10px; border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.92); color: #221a3a; font-size: 15px; font-family: inherit;
+  }
+  form.demo-form textarea { min-height: 110px; resize: vertical; }
+  form.demo-form button {
+    padding: 13px; border: none; border-radius: var(--radius-pill); font-weight: 700; font-size: 15.5px;
+    cursor: pointer; color: white; background: linear-gradient(135deg, var(--accent-violet), var(--accent-indigo));
+  }
+  form.demo-form button:hover { filter: brightness(1.1); }
+  .success-box { text-align: center; padding: 26px; font-size: 16px; font-weight: 600; }
+  .success-box .check { font-size: 30px; display: block; margin-bottom: 8px; }
+  .success-box small { display: block; margin-top: 8px; font-weight: 400; color: var(--text-faint); font-size: 13px; }
+
+  /* ---------- footer ---------- */
+  footer.site {
+    background: rgba(0,0,0,0.22);
+    border-top: 1px solid rgba(255,255,255,0.14);
+    padding: 34px 24px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .footer-links { display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; margin-bottom: 16px; font-size: 14px; }
+  .footer-links span { color: var(--text-faint); cursor: default; }
+  footer.site .addr { font-size: 13.5px; color: var(--text-faint); line-height: 1.6; }
+  footer.site .repo { margin-top: 16px; font-size: 13px; }
+  footer.site .repo a { color: #bfdbfe; text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ---------- modal ---------- */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(15,10,35,0.6); backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-card {
+    max-width: 480px; width: 100%; max-height: 85vh; overflow-y: auto;
+    background: linear-gradient(160deg, #4c1d95, #1e3a8a);
+    border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
+    padding: 0;
+  }
+  .modal-visual { height: 170px; display: flex; align-items: center; justify-content: center; font-size: 72px; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+  .modal-body { padding: 24px; }
+  .modal-body h3 { font-size: 22px; margin-bottom: 6px; }
+  .modal-tags { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 20px; }
+  .modal-tags span { background: rgba(255,255,255,0.14); border: 1px solid var(--glass-border); padding: 5px 12px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; }
+  .modal-actions { display: flex; gap: 10px; }
+  .modal-actions button {
+    padding: 11px 16px; border-radius: var(--radius-pill); font-weight: 700; font-size: 14px; cursor: pointer; border: 1px solid transparent; flex: 1;
+  }
+  .modal-close {
+    position: absolute; top: 14px; right: 14px; background: rgba(0,0,0,0.3); border: none; color: white;
+    width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 16px; line-height: 1;
+  }
+  .modal-card { position: relative; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .acard, .cat-pill { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-ribbon">
+  <strong>Démo de portfolio</strong> — données statiques, formulaire et connexion non connectés à un vrai serveur ·
+  <a href="https://github.com/Darknight28800/trouve_ton_artisan" target="_blank" rel="noopener noreferrer">code source complet sur GitHub</a>
+</div>
+
+<header class="site">
+  <div class="header-inner">
+    <div class="logo">
+      <strong>Trouve ton artisan !</strong>
+      <span>Eure-et-Loir</span>
+    </div>
+    <div class="header-search">
+      <input type="text" id="header-search" placeholder="Rechercher un artisan…" aria-label="Rechercher un artisan">
+    </div>
+    <nav class="main-nav">
+      <button class="navlink" data-scroll="hero">Accueil</button>
+      <button class="navlink" data-cat="Alimentation">Alimentation</button>
+      <button class="navlink" data-cat="Bâtiment">Bâtiment</button>
+      <button class="navlink" data-cat="Fabrication">Fabrication</button>
+      <button class="navlink" data-cat="Services">Services</button>
+      <button class="admin-pill" id="admin-btn">Admin ▾</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="hero">
+    <div class="wrap">
+      <h1>Trouvez votre <em>artisan de confiance</em></h1>
+      <p class="sub">Les meilleurs professionnels près de chez vous, en Eure-et-Loir.</p>
+
+      <form class="hero-search glass" id="hero-search-form">
+        <select id="hero-cat-select" aria-label="Catégorie">
+          <option value="">Quel service recherchez-vous ?</option>
+          <option value="Alimentation">Alimentation</option>
+          <option value="Bâtiment">Bâtiment</option>
+          <option value="Fabrication">Fabrication</option>
+          <option value="Services">Services</option>
+        </select>
+        <input type="text" id="hero-ville" placeholder="Votre ville" aria-label="Votre ville">
+        <button type="submit">Rechercher</button>
+      </form>
+
+      <div class="stats">
+        <div class="stat-card glass">
+          <span class="icon">🧑‍🔧</span>
+          <span class="value" id="stat-artisans">0</span>
+          <span class="label">Artisans référencés</span>
+        </div>
+        <div class="stat-card glass">
+          <span class="icon">🛠️</span>
+          <span class="value" id="stat-specialites">15</span>
+          <span class="label">Spécialités</span>
+        </div>
+        <div class="stat-card glass">
+          <span class="icon">⭐</span>
+          <span class="value" id="stat-note">0.0/5</span>
+          <span class="label">Note moyenne</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="populaires">
+    <h2>Artisans populaires</h2>
+    <p class="section-sub">Découvrez les artisans les mieux notés</p>
+    <div class="grid" id="grid-top"></div>
+  </section>
+
+  <section class="block" id="categories-section">
+    <h2>Catégories</h2>
+    <p class="section-sub">Cliquez pour filtrer les artisans par domaine</p>
+    <div class="cat-row" id="cat-row"></div>
+  </section>
+
+  <section class="block" id="tous-artisans">
+    <h2>Tous les artisans</h2>
+    <div class="filter-info" id="filter-info">
+      <span id="filter-info-text"></span>
+      <button id="filter-clear">Réinitialiser</button>
+    </div>
+    <div class="grid" id="grid-all"></div>
+    <p class="empty-msg" id="empty-msg" style="display:none;">Aucun artisan ne correspond à votre recherche.</p>
+  </section>
+
+  <section class="block" id="etapes">
+    <h2>Comment trouver mon artisan ?</h2>
+    <div class="steps">
+      <div class="step glass"><span class="num">1</span><p>Choisir la catégorie d'artisanat dans le menu.</p></div>
+      <div class="step glass"><span class="num">2</span><p>Choisir un artisan.</p></div>
+      <div class="step glass"><span class="num">3</span><p>Le contacter via le formulaire de contact.</p></div>
+      <div class="step glass"><span class="num">4</span><p>Une réponse sera apportée sous 48h.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="atouts">
+    <div class="features">
+      <div class="feature glass">
+        <span class="fi">📩</span>
+        <div><h3>Contact rapide</h3><p>Envoyez votre demande en quelques clics via le formulaire de contact.</p></div>
+      </div>
+      <div class="feature glass">
+        <span class="fi">✅</span>
+        <div><h3>Artisans référencés par l'équipe</h3><p>Chaque fiche est ajoutée et vérifiée par l'équipe Trouve Ton Artisan.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <h2>Contact</h2>
+    <p class="section-sub" id="contact-sub">Envoyez un message à un artisan</p>
+    <div class="contact-box glass" id="contact-box">
+      <form class="demo-form" id="demo-contact-form">
+        <input type="text" placeholder="Votre nom" required>
+        <input type="text" placeholder="Votre prénom">
+        <input type="tel" placeholder="Votre téléphone">
+        <input type="email" placeholder="Votre email" required>
+        <textarea placeholder="Votre message" required></textarea>
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="footer-links">
+    <span>Mentions légales</span>
+    <span>Données personnelles</span>
+    <span>Accessibilité</span>
+    <span>Cookies</span>
+  </div>
+  <div class="addr">
+    11 bis hameau de Dommarville · 28800 Sancheville · France<br>
+    +33 6 58 16 86 89 · sphereweb.28@gmail.com
+  </div>
+  <div class="repo">
+    Projet personnel — code source complet sur
+    <a href="https://github.com/Darknight28800/trouve_ton_artisan" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-card">
+    <button class="modal-close" id="modal-close" aria-label="Fermer">✕</button>
+    <div class="modal-visual" id="modal-visual"></div>
+    <div class="modal-body">
+      <h3 id="modal-name"></h3>
+      <div class="stars" id="modal-stars"></div>
+      <div class="modal-tags" id="modal-tags"></div>
+      <div class="modal-actions">
+        <button class="btn-ghost" id="modal-close-2">Fermer</button>
+        <button class="btn-fill" id="modal-contact">Contacter cet artisan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var ARTISANS = [
+    { id: 1, nom: "Boucherie Dumont", ville: "Chartres", note: 4.5, top: true, specialite: "Boucher", categorie: "Alimentation" },
+    { id: 2, nom: "Au pain chaud", ville: "Dreux", note: 4.8, top: true, specialite: "Boulanger", categorie: "Alimentation" },
+    { id: 3, nom: "Chocolaterie Labbé", ville: "Chartres", note: 4.9, top: true, specialite: "Chocolatier", categorie: "Alimentation" },
+    { id: 4, nom: "Traiteur Truchon", ville: "Châteaudun", note: 4.1, top: false, specialite: "Traiteur", categorie: "Alimentation" },
+    { id: 5, nom: "Orville Salmons", ville: "Nogent-le-Rotrou", note: 5.0, top: false, specialite: "Chauffagiste", categorie: "Bâtiment" },
+    { id: 6, nom: "Mont Blanc Électricité", ville: "Lucé", note: 4.5, top: false, specialite: "Electricien", categorie: "Bâtiment" },
+    { id: 7, nom: "Boutot & fils", ville: "Vernouillet", note: 4.7, top: false, specialite: "Menuisier", categorie: "Bâtiment" },
+    { id: 8, nom: "Vallis Bellemare", ville: "Mainvilliers", note: 4.0, top: false, specialite: "Plombier", categorie: "Bâtiment" },
+    { id: 9, nom: "Claude Quinn", ville: "Luisant", note: 4.2, top: false, specialite: "Bijoutier", categorie: "Fabrication" },
+    { id: 10, nom: "Amitee Lécuyer", ville: "Gallardon", note: 4.5, top: false, specialite: "Couturier", categorie: "Fabrication" },
+    { id: 11, nom: "Ernest Carignan", ville: "Bonneval", note: 5.0, top: false, specialite: "Ferronier", categorie: "Fabrication" },
+    { id: 12, nom: "Royden Charbonneau", ville: "Illiers-Combray", note: 3.8, top: false, specialite: "Coiffeur", categorie: "Services" },
+    { id: 13, nom: "Leala Dennis", ville: "Brou", note: 3.8, top: false, specialite: "Coiffeur", categorie: "Services" },
+    { id: 14, nom: "C'est sup'hair", ville: "Voves", note: 4.1, top: false, specialite: "Coiffeur", categorie: "Services" },
+    { id: 15, nom: "Le monde des fleurs", ville: "Auneau", note: 4.6, top: false, specialite: "Fleuriste", categorie: "Services" },
+    { id: 16, nom: "Valérie Laderoute", ville: "Anet", note: 4.5, top: false, specialite: "Toiletteur", categorie: "Services" },
+    { id: 17, nom: "CM Graphisme", ville: "Épernon", note: 4.4, top: false, specialite: "Webdesign", categorie: "Services" }
+  ];
+
+  var CAT_THEME = {
+    "Alimentation": { a: "#f59e0b", b: "#ea580c" },
+    "Bâtiment":     { a: "#c2703d", b: "#7c4a2d" },
+    "Fabrication":  { a: "#0d9488", b: "#0f766e" },
+    "Services":     { a: "#0ea5e9", b: "#2563eb" }
+  };
+
+  var ICONS = {
+    "Boucher": "🥩", "Boulanger": "🥖", "Chocolatier": "🍫", "Traiteur": "🍽️",
+    "Chauffagiste": "🔥", "Electricien": "⚡", "Menuisier": "🪚", "Plombier": "🔧",
+    "Bijoutier": "💍", "Couturier": "🧵", "Ferronier": "⚒️",
+    "Coiffeur": "💇", "Fleuriste": "💐", "Toiletteur": "🐾", "Webdesign": "💻"
+  };
+
+  function esc(s) {
+    var d = document.createElement("div");
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function starString(note) {
+    var full = Math.round(note);
+    var s = "";
+    for (var i = 0; i < 5; i++) s += (i < full ? "★" : "<span class=\"off\">★</span>");
+    return s;
+  }
+
+  function grad(cat) {
+    var t = CAT_THEME[cat] || CAT_THEME["Services"];
+    return "linear-gradient(135deg," + t.a + "," + t.b + ")";
+  }
+
+  function cardHTML(a) {
+    return (
+      '<div class="acard glass" data-id="' + a.id + '">' +
+        '<div class="visual" style="background:' + grad(a.categorie) + '">' + (ICONS[a.specialite] || "🛠️") + '</div>' +
+        '<div class="body">' +
+          '<h3>' + esc(a.nom) + '</h3>' +
+          '<p class="ville">📍 ' + esc(a.ville) + '</p>' +
+          '<div class="stars">' + starString(a.note) + '</div>' +
+          '<p class="meta">' + esc(a.specialite) + ' · ' + esc(a.categorie) + '</p>' +
+          '<div class="actions">' +
+            '<button class="btn-ghost" data-detail="' + a.id + '">Voir la fiche</button>' +
+            '<button class="btn-fill" data-contact="' + a.id + '">Contacter</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  // ---- stats ----
+  document.getElementById("stat-artisans").textContent = ARTISANS.length;
+  var avg = ARTISANS.reduce(function (s, a) { return s + a.note; }, 0) / ARTISANS.length;
+  document.getElementById("stat-note").textContent = avg.toFixed(1) + "/5";
+
+  // ---- populaires ----
+  document.getElementById("grid-top").innerHTML = ARTISANS.filter(function (a) { return a.top; }).map(cardHTML).join("");
+
+  // ---- category pills ----
+  var catRow = document.getElementById("cat-row");
+  Object.keys(CAT_THEME).forEach(function (cat) {
+    var t = CAT_THEME[cat];
+    var btn = document.createElement("button");
+    btn.className = "cat-pill";
+    btn.style.setProperty("--pa", t.a);
+    btn.style.setProperty("--pb", t.b);
+    btn.dataset.cat = cat;
+    btn.textContent = cat;
+    catRow.appendChild(btn);
+  });
+
+  // ---- filtering state ----
+  var state = { search: "", cat: "" };
+  var allGrid = document.getElementById("grid-all");
+  var tousSection = document.getElementById("tous-artisans");
+  var filterInfo = document.getElementById("filter-info");
+  var filterInfoText = document.getElementById("filter-info-text");
+  var emptyMsg = document.getElementById("empty-msg");
+
+  function renderAll() {
+    var list = ARTISANS.filter(function (a) {
+      var matchSearch = a.nom.toLowerCase().indexOf(state.search.toLowerCase()) !== -1;
+      var matchCat = state.cat ? a.categorie === state.cat : true;
+      return matchSearch && matchCat;
+    });
+
+    allGrid.innerHTML = list.map(cardHTML).join("");
+    emptyMsg.style.display = list.length ? "none" : "block";
+
+    if (state.cat) {
+      var t = CAT_THEME[state.cat];
+      tousSection.style.setProperty("--cat-a", t.a);
+      tousSection.style.setProperty("--cat-b", t.b);
+      tousSection.classList.add("tinted");
+    } else {
+      tousSection.classList.remove("tinted");
+    }
+
+    var parts = [];
+    if (state.cat) parts.push("catégorie « " + state.cat + " »");
+    if (state.search) parts.push('recherche « ' + state.search + ' »');
+    if (parts.length) {
+      filterInfoText.textContent = "Filtré par " + parts.join(" et ") + " — " + list.length + " résultat" + (list.length > 1 ? "s" : "");
+      filterInfo.classList.add("show");
+    } else {
+      filterInfo.classList.remove("show");
+    }
+
+    document.querySelectorAll(".cat-pill").forEach(function (p) {
+      p.classList.toggle("active", p.dataset.cat === state.cat);
+    });
+  }
+  renderAll();
+
+  catRow.addEventListener("click", function (e) {
+    var btn = e.target.closest(".cat-pill");
+    if (!btn) return;
+    state.cat = state.cat === btn.dataset.cat ? "" : btn.dataset.cat;
+    renderAll();
+    document.getElementById("tous-artisans").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  document.getElementById("filter-clear").addEventListener("click", function () {
+    state.cat = ""; state.search = "";
+    document.getElementById("header-search").value = "";
+    renderAll();
+  });
+
+  document.querySelectorAll("[data-cat]").forEach(function (el) {
+    if (el.classList.contains("cat-pill")) return;
+    el.addEventListener("click", function () {
+      state.cat = el.dataset.cat;
+      renderAll();
+      document.getElementById("tous-artisans").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  var headerSearch = document.getElementById("header-search");
+  headerSearch.addEventListener("input", function () {
+    state.search = headerSearch.value;
+    renderAll();
+  });
+
+  document.getElementById("hero-search-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var cat = document.getElementById("hero-cat-select").value;
+    var ville = document.getElementById("hero-ville").value;
+    state.cat = cat;
+    state.search = ville;
+    headerSearch.value = ville;
+    renderAll();
+    document.getElementById("tous-artisans").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  document.querySelector('[data-scroll="hero"]').addEventListener("click", function () {
+    document.getElementById("hero").scrollIntoView({ behavior: "smooth" });
+  });
+
+  // ---- modal ----
+  var overlay = document.getElementById("modal-overlay");
+  var modalVisual = document.getElementById("modal-visual");
+  var modalName = document.getElementById("modal-name");
+  var modalStars = document.getElementById("modal-stars");
+  var modalTags = document.getElementById("modal-tags");
+  var modalContactBtn = document.getElementById("modal-contact");
+  var currentArtisan = null;
+
+  function openModal(id) {
+    var a = ARTISANS.filter(function (x) { return x.id === id; })[0];
+    if (!a) return;
+    currentArtisan = a;
+    modalVisual.style.background = grad(a.categorie);
+    modalVisual.textContent = ICONS[a.specialite] || "🛠️";
+    modalName.textContent = a.nom;
+    modalStars.innerHTML = starString(a.note);
+    modalTags.innerHTML =
+      '<span>📍 ' + esc(a.ville) + '</span>' +
+      '<span>' + esc(a.specialite) + '</span>' +
+      '<span>' + esc(a.categorie) + '</span>';
+    modalContactBtn.style.display = "";
+    overlay.classList.add("open");
+  }
+
+  function openInfoModal(title, html) {
+    currentArtisan = null;
+    modalVisual.style.background = "linear-gradient(135deg, var(--accent-violet), var(--accent-indigo))";
+    modalVisual.textContent = "🔐";
+    modalName.textContent = title;
+    modalStars.innerHTML = "";
+    modalTags.innerHTML = '<p style="margin:0;color:var(--text-dim);font-size:14.5px;line-height:1.6;">' + html + '</p>';
+    modalContactBtn.style.display = "none";
+    overlay.classList.add("open");
+  }
+
+  function closeModal() { overlay.classList.remove("open"); }
+
+  document.addEventListener("click", function (e) {
+    var d = e.target.closest("[data-detail]");
+    if (d) { openModal(parseInt(d.dataset.detail, 10)); return; }
+    var c = e.target.closest("[data-contact]");
+    if (c) { scrollToContact(ARTISANS.filter(function (x) { return x.id === parseInt(c.dataset.contact, 10); })[0]); return; }
+  });
+
+  document.getElementById("modal-close").addEventListener("click", closeModal);
+  document.getElementById("modal-close-2").addEventListener("click", closeModal);
+  overlay.addEventListener("click", function (e) { if (e.target === overlay) closeModal(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
+
+  modalContactBtn.addEventListener("click", function () {
+    var a = currentArtisan;
+    closeModal();
+    scrollToContact(a);
+  });
+
+  function scrollToContact(a) {
+    var sub = document.getElementById("contact-sub");
+    if (a) sub.innerHTML = 'Vous contactez : <strong style="color:white">' + esc(a.nom) + '</strong>';
+    document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+  }
+
+  // ---- fake contact submit ----
+  document.getElementById("demo-contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var box = document.getElementById("contact-box");
+    box.innerHTML =
+      '<div class="success-box">' +
+        '<span class="check">✅</span>' +
+        'Message envoyé !' +
+        '<small>Ceci est une démonstration : aucun email n\'a réellement été transmis. Sur le site complet, l\'artisan recevrait votre message par email.</small>' +
+      '</div>';
+  });
+
+  // ---- admin demo note ----
+  document.getElementById("admin-btn").addEventListener("click", function () {
+    openInfoModal(
+      "Espace administrateur",
+      "Non activé dans cette démonstration.<br><br>Sur le site complet : authentification sécurisée, gestion des artisans, des catégories, des spécialités et des messages reçus."
+    );
+  });
+})();
+</script>
+</body>
+</html>
