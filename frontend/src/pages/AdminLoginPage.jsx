@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../styles/pages/AdminLogin.scss";
 
 export default function AdminLoginPage() {
@@ -35,6 +35,10 @@ export default function AdminLoginPage() {
 
     return (
             <div className="admin-login">
+                <Link to="/" className="back-to-site">
+                    ← Retour au site
+                </Link>
+
                 <h1>Connexion Admin</h1>
 
             <form className="login-box" onSubmit={handleLogin}>
