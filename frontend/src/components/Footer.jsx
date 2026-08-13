@@ -10,11 +10,10 @@ export default function Footer() {
                 <Link to="/cookies">Cookies</Link>
             </p>
             <p>
-                101 cours Charlemagne<br />
-                CS 20033<br />
-                69269 LYON CEDEX 02<br />
+                11 bis hameau de Dommarville<br />
+                28800 Sancheville<br />
                 France<br />
-                +33 (0)4 26 73 40 00
+                +33 6 58 16 86 89
             </p>
         </footer>
     );
