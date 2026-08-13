@@ -1,0 +1,66 @@
+@import "../variables";
+
+.not-found-page {
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.not-found-card {
+    text-align: center;
+    padding: 50px 40px;
+    max-width: 480px;
+    color: white;
+
+    .not-found-code {
+        display: block;
+        font-size: 72px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #f0abfc, #93c5fd);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 10px;
+    }
+
+    h1 {
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 28px;
+    }
+
+    .btn-home {
+        display: inline-block;
+        padding: 12px 28px;
+        border-radius: 999px;
+        background: $brand-accent-gradient;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.2s;
+
+        &:hover {
+            filter: brightness(1.1);
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .not-found-page {
+        padding: 50px 15px;
+    }
+
+    .not-found-card {
+        padding: 35px 24px;
+
+        .not-found-code {
+            font-size: 56px;
+        }
+    }
+}

@@ -128,11 +128,15 @@ export default function ArtisansPage() {
             </div>
 
             {/* Grille artisans */}
-            <div className="artisans-list">
-                {filtered.map((artisan) => (
-                    <ArtisanCard key={artisan.id} artisan={artisan} />
-                ))}
-            </div>
+            {filtered.length > 0 ? (
+                <div className="artisans-list">
+                    {filtered.map((artisan) => (
+                        <ArtisanCard key={artisan.id} artisan={artisan} />
+                    ))}
+                </div>
+            ) : (
+                <p className="no-results">Aucun artisan ne correspond à votre recherche.</p>
+            )}
 
         </Container>
     );

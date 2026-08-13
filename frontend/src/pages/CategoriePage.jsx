@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import "../styles/pages/CategoriePage.scss";
-
-// On importe TON composant card
+import Container from "../components/Container";
 import ArtisanCard from "../components/ArtisanCard";
+import { getCategoryTheme } from "../utile/categoryTheme";
 
 export default function CategoriePage() {
     const { id } = useParams();
@@ -25,25 +25,26 @@ export default function CategoriePage() {
             .catch((err) => console.error(err));
     }, [id]);
 
-    if (!categorie) return <p>Chargement...</p>;
+    if (!categorie) return <p className="loading">Chargement...</p>;
+
+    const theme = getCategoryTheme(categorie.nom);
 
     return (
-        <div className="categorie-page container py-4">
-            <h1 className="mb-4">{categorie.nom}</h1>
+        <Container
+            className="categorie-page"
+            style={{ "--cat-accent": theme.accent, "--cat-accent2": theme.accent2 }}
+        >
+            <h1>{categorie.nom}</h1>
 
-            {artisans.length === 0 && (
-                <p>Aucun artisan trouvé dans cette catégorie.</p>
+            {artisans.length === 0 ? (
+                <p className="no-results">Aucun artisan trouvé dans cette catégorie.</p>
+            ) : (
+                <div className="artisans-list">
+                    {artisans.map((artisan) => (
+                        <ArtisanCard key={artisan.id} artisan={artisan} />
+                    ))}
+                </div>
             )}
-
-            {/* Grille responsive identique à la page artisans */}
-            <div className="row g-4">
-                {artisans.map((artisan) => (
-                    <div key={artisan.id} className="col-12 col-md-6 col-lg-4">
-                        <ArtisanCard artisan={artisan} />
-                    </div>
-                ))}
-            </div>
-        </div>
+        </Container>
     );
 }
-

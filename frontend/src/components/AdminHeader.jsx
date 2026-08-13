@@ -24,17 +24,23 @@ export default function AdminHeader() {
                 </nav>
             </div>
 
-            {/* Si connecté → bouton déconnexion */}
-            {isLogged ? (
-                <button className="logout-btn" onClick={handleLogout}>
-                    Déconnexion
-                </button>
-            ) : (
-                /* Sinon → bouton connexion */
-                <Link to="/admin/login" className="login-btn">
-                    Connexion
+            <div className="right">
+                <Link to="/" className="back-to-site">
+                    ← Retour au site
                 </Link>
-            )}
+
+                {/* Si connecté → bouton déconnexion */}
+                {isLogged ? (
+                    <button className="logout-btn" onClick={handleLogout}>
+                        Déconnexion
+                    </button>
+                ) : (
+                    /* Sinon → bouton connexion */
+                    <Link to="/admin/login" className="login-btn">
+                        Connexion
+                    </Link>
+                )}
+            </div>
         </header>
     );
 }

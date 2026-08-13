@@ -1,13 +1,17 @@
+@import "../variables";
+
 .contact-page {
     max-width: 700px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 50px 20px;
+    position: relative;
+    z-index: 1;
 
     /* TITRE */
     h1 {
         text-align: center;
-        margin-bottom: 30px;
-        color: #0074c7;
+        margin-bottom: 20px;
+        color: white;
         font-size: 32px;
     }
 
@@ -16,35 +20,34 @@
         text-align: center;
         font-size: 18px;
         margin-bottom: 20px;
-        color: #333;
+        color: rgba(255, 255, 255, 0.85);
 
         strong {
-            color: #0074c7;
+            color: white;
         }
     }
 
     /* FORMULAIRE */
     form {
-        background: #f8f8f8;
-        padding: 25px;
-        border-radius: 12px;
-        border: 1px solid #ddd;
+        @include glass-panel();
+        padding: 28px;
         display: flex;
         flex-direction: column;
         gap: 18px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 
         input,
         textarea {
             padding: 14px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
+            border-radius: 10px;
+            border: 1px solid $glass-border;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2a2a2a;
             font-size: 16px;
             transition: 0.2s ease;
 
             &:focus {
-                border-color: #0074c7;
-                box-shadow: 0 0 0 3px rgba(0,116,199,0.15);
+                border-color: white;
+                box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
                 outline: none;
             }
         }
@@ -55,10 +58,10 @@
         }
 
         button {
-            background: #0074c7;
+            background: $brand-accent-gradient;
             color: white;
             padding: 14px;
-            border-radius: 8px;
+            border-radius: 999px;
             border: none;
             font-size: 17px;
             font-weight: 600;
@@ -66,7 +69,7 @@
             transition: 0.25s ease;
 
             &:hover {
-                background: #005fa3;
+                filter: brightness(1.1);
                 transform: translateY(-2px);
             }
 
@@ -78,12 +81,10 @@
 
     /* MESSAGE DE SUCCÈS */
     .success {
+        @include glass-panel();
         text-align: center;
-        padding: 15px;
-        background: #e6f3ff;
-        border: 1px solid #bcdcff;
-        border-radius: 8px;
-        color: #0074c7;
+        padding: 20px;
+        color: white;
         margin-top: 20px;
         font-size: 18px;
         font-weight: 600;
@@ -93,7 +94,7 @@
 /* MODE TABLETTE — dès 1060px */
 @media (max-width: 1060px) {
     .contact-page {
-        padding: 15px;
+        padding: 35px 15px;
 
         h1 {
             font-size: 28px;
@@ -108,7 +109,7 @@
 /* MODE MOBILE — dès 780px */
 @media (max-width: 780px) {
     .contact-page {
-        padding: 10px;
+        padding: 25px 10px;
 
         h1 {
             font-size: 24px;

@@ -1,72 +1,68 @@
+@import "../variables";
+
 .artisans-page {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 50px 20px;
+    position: relative;
+    z-index: 1;
 
     h1 {
         text-align: center;
         margin-bottom: 30px;
-    }
-
-    /* Espacements entre sections */
-    section {
-        margin-top: 40px;
-        margin-bottom: 40px;
-    }
-
-    h2 {
-        margin-top: 40px;
-        margin-bottom: 25px;
-    }
-
-    /* Barre de recherche */
-    .search-bar {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 30px;
-
-        input {
-        flex: 1;
-        padding: 12px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        }
-
-        button {
-        background: #0074c7;
         color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        transition: 0.25s ease;
+    }
 
-        &:hover {
-            background: #005fa3;
-            transform: translateY(-2px);
-        }
+    /* Filtres */
+    .filters {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+
+        select {
+            padding: 12px 18px;
+            border-radius: 999px;
+            border: 1px solid $glass-border;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2a2a2a;
+            font-size: 15px;
+            min-width: 220px;
         }
     }
 
     /* Grille artisans */
     .artisans-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
     }
 
-    /* Mobile */
-    @media (max-width: 768px) {
+    .no-results {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 40px;
+        font-size: 16px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
     .artisans-page {
-        padding: 10px;
+        padding: 30px 10px;
 
-        .search-bar {
-        flex-direction: column;
+        .filters {
+            flex-direction: column;
+            align-items: stretch;
+
+            select {
+                min-width: 0;
+            }
         }
 
         .artisans-list {
-        justify-content: center;
+            grid-template-columns: 1fr;
         }
     }
 }

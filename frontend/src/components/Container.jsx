@@ -1,6 +1,6 @@
-export default function Container({ children, className = "" }) {
+export default function Container({ children, className = "", ...rest }) {
     return (
-        <div className={`container ${className}`}>
+        <div className={`container ${className}`} {...rest}>
             {children}
         </div>
     );

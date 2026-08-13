@@ -35,6 +35,23 @@
         }
     }
 
+    .right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .back-to-site {
+        color: #ddd;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.2s;
+
+        &:hover {
+            color: white;
+        }
+    }
+
     .logout-btn,
     .login-btn {
         background: #e63946;

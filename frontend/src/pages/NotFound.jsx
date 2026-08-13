@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import Container from "../components/Container";
+import "../styles/pages/NotFound.scss";
 
 export default function NotFound() {
 
@@ -17,19 +19,16 @@ export default function NotFound() {
     }, []);
 
     return (
-        <div className="container text-center" style={{ padding: "60px 20px" }}>
-            <img 
-                src="/images/404.jpg"
-                alt="Page non trouvée"
-                style={{ maxWidth: "350px", marginBottom: "20px" }}
-            />
+        <Container className="not-found-page">
+            <div className="not-found-card glass-panel">
+                <span className="not-found-code">404</span>
+                <h1>Page non trouvée</h1>
+                <p>La page que vous cherchez n'existe pas ou a été déplacée.</p>
 
-            <h1>Page non trouvée</h1>
-            <p>La page que vous cherchez n'existe pas.</p>
-
-            <Link to="/" className="btn btn-primary mt-3">
-                Retour à l'accueil
-            </Link>
-        </div>
+                <Link to="/" className="btn-home">
+                    Retour à l'accueil
+                </Link>
+            </div>
+        </Container>
     );
 }

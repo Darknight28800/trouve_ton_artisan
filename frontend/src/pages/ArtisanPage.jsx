@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
-import { getArtisanImage } from "../utile/getArtisanImage"; 
+import Etoiles from "../components/Etoiles";
+import { getArtisanImage } from "../utile/getArtisanImage";
 import "../styles/pages/artisan.scss";
 
 export default function ArtisanPage() {
@@ -31,46 +32,42 @@ export default function ArtisanPage() {
         }
     }, [artisan]);
 
-    if (!artisan) return <p>Chargement...</p>;
+    if (!artisan) return <p className="loading">Chargement...</p>;
 
     // Image générée automatiquement (comme dans les cards)
     const imageUrl = getArtisanImage(artisan);
 
     return (
         <Container className="artisan-page">
-
-            {/* Image artisan */}
-            <img 
-                src={imageUrl}
-                alt={artisan.nom}
-                style={{
-                    width: "300px",
-                    borderRadius: "8px",
-                    marginBottom: "20px"
-                }}
-            />
-
-            <h1>{artisan.nom}</h1>
-
-            <p><strong>Ville :</strong> {artisan.ville}</p>
-            <p><strong>Spécialité :</strong> {artisan.Specialite?.nom}</p>
-            <p><strong>Catégorie :</strong> {artisan.Specialite?.Categorie?.nom}</p>
-
-            {/* DESCRIPTION — ajout propre */}
-            {artisan.description && (
-                <div className="artisan-description" style={{ marginTop: "20px" }}>
-                    <h2>À propos</h2>
-                    <p>{artisan.description}</p>
+            <div className="artisan-info glass-panel">
+                <div className="artisan-image">
+                    <img src={imageUrl} alt={artisan.nom} />
                 </div>
-            )}
 
-            {/* Bouton contacter */}
-            <Link 
-                to={`/contact?artisan=${artisan.id}`} 
-                className="btn-contact"
-            >
-                Contacter cet artisan
-            </Link>
+                <div className="artisan-details">
+                    <h1>{artisan.nom}</h1>
+                    <Etoiles note={artisan.note} />
+
+                    <div className="tags">
+                        {artisan.ville && <span className="tag">📍 {artisan.ville}</span>}
+                        {artisan.Specialite?.nom && <span className="tag">{artisan.Specialite.nom}</span>}
+                        {artisan.Specialite?.Categorie?.nom && (
+                            <span className="tag">{artisan.Specialite.Categorie.nom}</span>
+                        )}
+                    </div>
+
+                    {artisan.description && (
+                        <div className="artisan-description">
+                            <h2>À propos</h2>
+                            <p>{artisan.description}</p>
+                        </div>
+                    )}
+
+                    <Link to={`/contact?artisan=${artisan.id}`} className="btn-contact">
+                        Contacter cet artisan
+                    </Link>
+                </div>
+            </div>
         </Container>
     );
 }
