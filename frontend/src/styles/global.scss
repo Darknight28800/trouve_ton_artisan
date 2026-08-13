@@ -15,7 +15,6 @@
 @import "./components/header";
 @import "./components/footer";
 @import "./components/ArtisanCard";
-@import "./components/CategorieCard";
 @import "./components/SectionTitle";
 @import "./components/AdminArtisanForm";
 @import "./components/AdminCategorieForm";
@@ -54,17 +53,50 @@ body {
     font-weight: 600;
     }
 
-    footer {
-    background: #0074c7;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
+/* =========================
+   THÈME PUBLIC (fond dégradé + halos) — n'affecte pas l'espace admin
+========================= */
+body.public-theme {
+    background: $brand-bg-gradient;
+    background-attachment: fixed;
+    min-height: 100vh;
+    position: relative;
+    color: #fff;
 
-    a {
-        color: white;
-        text-decoration: underline;
+    &::before,
+    &::after {
+        content: "";
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        pointer-events: none;
+        z-index: 0;
     }
+
+    &::before {
+        width: 480px;
+        height: 480px;
+        top: -120px;
+        left: -100px;
+        background: rgba(236, 72, 153, 0.35);
+    }
+
+    &::after {
+        width: 520px;
+        height: 520px;
+        bottom: -160px;
+        right: -120px;
+        background: rgba(59, 130, 246, 0.3);
+    }
+
+    h1, h2, h3 {
+        color: #fff;
+    }
+}
+
+/* Utilitaire "vitre" réutilisable sur le thème public */
+.glass-panel {
+    @include glass-panel();
 }
 
 .search-container {

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/components/header.scss";
-import logo from "../assets/logo/Trouve-ton-artisan.png";
 import api from "../services/api";
 
 export default function Header() {
@@ -31,7 +30,8 @@ export default function Header() {
             {/* Logo */}
             <div className="header_logo">
                 <Link to="/">
-                    <img src={logo} alt="Trouve Ton Artisan" />
+                    <span className="header_logo-title">Trouve ton artisan !</span>
+                    <span className="header_logo-subtitle">Eure-et-Loir</span>
                 </Link>
             </div>
 

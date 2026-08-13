@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 // Pages principales
 import HomePage from "./pages/HomePage";
@@ -31,10 +32,19 @@ import NotFound from "./pages/NotFound";
 // Protection admin
 import ProtectedRoute from "./components/ProtectedRoute";
 
-function App() {
+function AppShell() {
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith("/admin");
+
+  // L'espace admin garde son propre habillage (AdminHeader + fond clair) :
+  // le header public et le fond dégradé ne s'appliquent qu'au site public.
+  useEffect(() => {
+    document.body.classList.toggle("public-theme", !isAdmin);
+  }, [isAdmin]);
+
   return (
-    <BrowserRouter>
-      <Header />
+    <>
+      {!isAdmin && <Header />}
 
       <Routes>
         {/* Pages principales */}
@@ -103,7 +113,15 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-      <Footer />
+      {!isAdmin && <Footer />}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppShell />
     </BrowserRouter>
   );
 }

@@ -16,7 +16,11 @@ export default function AdminHeader() {
                 <h2>Admin</h2>
 
                 <nav>
+                    <Link to="/admin">Dashboard</Link>
                     <Link to="/admin/messages">Messages</Link>
+                    <Link to="/admin/artisans">Artisans</Link>
+                    <Link to="/admin/categories">Catégories</Link>
+                    <Link to="/admin/specialites">Spécialités</Link>
                 </nav>
             </div>
 

@@ -1,23 +1,31 @@
-.footer {
-    background: #0074c7;
+@import "../variables";
+
+.site-footer {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur($glass-blur);
+    -webkit-backdrop-filter: blur($glass-blur);
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
     color: white;
     padding: 30px 20px;
-    margin-top: 40px;
+    margin-top: 60px;
     text-align: center;
+    position: relative;
+    z-index: 1;
 
     a {
         color: white;
         text-decoration: none;
         font-weight: 500;
+        opacity: 0.85;
         transition: 0.2s;
 
         &:hover {
+            opacity: 1;
             text-decoration: underline;
         }
     }
 
-    /* LIENS */
-    &__links {
+    .site-footer-links {
         display: flex;
         justify-content: center;
         gap: 25px;
@@ -25,42 +33,39 @@
         margin-bottom: 20px;
     }
 
-    /* TEXTE BAS DE PAGE */
-    &__info {
+    .site-footer-info {
         font-size: 14px;
         line-height: 1.5;
-        opacity: 0.9;
+        opacity: 0.75;
         max-width: 600px;
         margin: 0 auto;
     }
 }
 
-/* MODE TABLETTE — dès 1060px */
 @media (max-width: 1060px) {
-    .footer {
+    .site-footer {
         padding: 25px 15px;
 
-        &__links {
+        .site-footer-links {
             gap: 18px;
         }
 
-        &__info {
+        .site-footer-info {
             font-size: 13.5px;
         }
     }
 }
 
-/* MODE MOBILE — dès 780px */
 @media (max-width: 780px) {
-    .footer {
+    .site-footer {
         padding: 20px 10px;
 
-        &__links {
+        .site-footer-links {
             flex-direction: column;
             gap: 12px;
         }
 
-        &__info {
+        .site-footer-info {
             font-size: 13px;
             line-height: 1.4;
             padding: 0 10px;

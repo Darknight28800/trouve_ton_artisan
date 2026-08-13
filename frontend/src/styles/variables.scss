@@ -3,3 +3,28 @@ $secondary: #005a9e;
 $light: #f5f5f5;
 $dark: #333;
 $radius: 8px;
+
+/* =========================
+   IDENTITÉ VISUELLE PUBLIQUE (dégradé violet/bleu + glassmorphism)
+   L'espace admin garde l'ancienne palette ($primary bleu ci-dessus).
+========================= */
+$brand-violet: #7c3aed;
+$brand-indigo: #4338ca;
+$brand-pink: #ec4899;
+$brand-bg-gradient: linear-gradient(160deg, #5b21b6 0%, #4c1d95 22%, #3730a3 55%, #1e3a8a 100%);
+$brand-accent-gradient: linear-gradient(135deg, $brand-violet, $brand-indigo);
+
+$glass-bg: rgba(255, 255, 255, 0.1);
+$glass-bg-strong: rgba(255, 255, 255, 0.16);
+$glass-border: rgba(255, 255, 255, 0.22);
+$glass-blur: 18px;
+
+// Fond translucide "verre" sans flou : utilisé sur les cards répétées (nombreuses
+// instances sur une page), où empiler des dizaines de calques backdrop-filter
+// dégraderait les performances/le rendu. Le flou est réservé aux éléments uniques
+// qui passent au-dessus de contenu qui défile (header, footer : voir header.scss).
+@mixin glass-panel($bg: $glass-bg) {
+    background: $bg;
+    border: 1px solid $glass-border;
+    border-radius: 18px;
+}
