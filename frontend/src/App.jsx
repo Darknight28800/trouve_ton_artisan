@@ -43,9 +43,10 @@ function AppShell() {
   }, [isAdmin]);
 
   return (
-    <>
+    <div className="page-shell">
       {!isAdmin && <Header />}
 
+      <main className="page-content">
       <Routes>
         {/* Pages principales */}
         <Route path="/" element={<HomePage />} />
@@ -112,9 +113,10 @@ function AppShell() {
         {/* 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </main>
 
       {!isAdmin && <Footer />}
-    </>
+    </div>
   );
 }
 

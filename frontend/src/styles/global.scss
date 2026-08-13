@@ -48,6 +48,18 @@ body {
     color: #333;
     }
 
+/* Maintient le footer collé en bas même quand le contenu est court
+   (ex: une catégorie avec peu d'artisans) */
+.page-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.page-content {
+    flex: 1;
+}
+
     h1,
     h2 {
     font-weight: 600;
