@@ -1,13 +1,24 @@
 import { Link } from "react-router-dom";
 import Etoiles from "./Etoiles";
-import { getArtisanImage } from "../utile/getArtisanImage";
+import { getSpecialiteIcon } from "../utile/artisanIcon";
+import { getCategoryTheme } from "../utile/categoryTheme";
 
 export default function ArtisanCard({ artisan }) {
-    const imageUrl = getArtisanImage(artisan);
+    const specialiteNom = artisan.Specialite?.nom || "";
+    const categorieNom = artisan.Specialite?.Categorie?.nom || "";
+    const icon = getSpecialiteIcon(specialiteNom, categorieNom);
+    const theme = getCategoryTheme(categorieNom);
 
     return (
         <div className="artisan-card glass-panel">
-            <img src={imageUrl} alt={artisan.nom} className="artisan-card-img" />
+            <div
+                className="artisan-card-visual"
+                style={{
+                    background: `linear-gradient(135deg, ${theme.accent}, ${theme.accent2})`,
+                }}
+            >
+                <span aria-hidden="true">{icon}</span>
+            </div>
 
             <div className="artisan-card-body">
                 <h3>{artisan.nom}</h3>
@@ -21,8 +32,8 @@ export default function ArtisanCard({ artisan }) {
                 </div>
 
                 <p className="artisan-card-specialite">
-                    {artisan.Specialite?.nom}
-                    {artisan.Specialite?.Categorie?.nom && ` · ${artisan.Specialite.Categorie.nom}`}
+                    {specialiteNom}
+                    {categorieNom && ` · ${categorieNom}`}
                 </p>
 
                 <div className="artisan-card-actions">

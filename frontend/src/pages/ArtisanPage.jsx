@@ -4,7 +4,8 @@ import api from "../services/api";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
 import Etoiles from "../components/Etoiles";
-import { getArtisanImage } from "../utile/getArtisanImage";
+import { getSpecialiteIcon } from "../utile/artisanIcon";
+import { getCategoryTheme } from "../utile/categoryTheme";
 import "../styles/pages/artisan.scss";
 
 export default function ArtisanPage() {
@@ -34,14 +35,21 @@ export default function ArtisanPage() {
 
     if (!artisan) return <p className="loading">Chargement...</p>;
 
-    // Image générée automatiquement (comme dans les cards)
-    const imageUrl = getArtisanImage(artisan);
+    const specialiteNom = artisan.Specialite?.nom || "";
+    const categorieNom = artisan.Specialite?.Categorie?.nom || "";
+    const icon = getSpecialiteIcon(specialiteNom, categorieNom);
+    const theme = getCategoryTheme(categorieNom);
 
     return (
         <Container className="artisan-page">
             <div className="artisan-info glass-panel">
-                <div className="artisan-image">
-                    <img src={imageUrl} alt={artisan.nom} />
+                <div
+                    className="artisan-image"
+                    style={{
+                        background: `linear-gradient(135deg, ${theme.accent}, ${theme.accent2})`,
+                    }}
+                >
+                    <span aria-hidden="true">{icon}</span>
                 </div>
 
                 <div className="artisan-details">
