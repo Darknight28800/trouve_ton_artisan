@@ -68,7 +68,7 @@ export default function AdminArtisansPage() {
         {/* POPUP FORM */}
         {showForm && (
             <div className="modal-overlay" onClick={() => setShowForm(false)}>
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
                 <AdminArtisanForm
                 artisan={artisanToEdit}
                 onSubmit={handleSave}
@@ -81,7 +81,7 @@ export default function AdminArtisansPage() {
         <div className="artisans-list">
             {artisans.map((a) => (
             <div className="artisan-card" key={a.id}>
-                <div className="header">
+                <div className="card-header">
                 <h2>{a.nom}</h2>
                 <span className="specialite">
                     {a.Specialite?.nom} — {a.Specialite?.Categorie?.nom}

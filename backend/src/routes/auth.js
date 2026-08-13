@@ -1,11 +1,20 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import rateLimit from "express-rate-limit";
 import { User } from "../models/index.js"; // ✔ CORRECTION ICI
 
 const router = express.Router();
 
-router.post("/login", async (req, res) => {
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    limit: 10,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { message: "Trop de tentatives de connexion, réessayez plus tard." }
+});
+
+router.post("/login", loginLimiter, async (req, res) => {
     const { email, password } = req.body;
 
     try {

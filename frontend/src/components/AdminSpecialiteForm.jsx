@@ -4,7 +4,7 @@ import "../styles/components/AdminSpecialiteForm.scss";
 export default function AdminSpecialiteForm({ specialite, categories, onSubmit, onCancel }) {
     const [form, setForm] = useState({
         nom: specialite?.nom || "",
-        categorieId: specialite?.categorieId || "",
+        categorie_id: specialite?.categorie_id || "",
     });
 
     const handleChange = (e) => {
@@ -21,8 +21,9 @@ export default function AdminSpecialiteForm({ specialite, categories, onSubmit, 
         <h2>{specialite ? "Modifier la spécialité" : "Ajouter une spécialité"}</h2>
 
         <form onSubmit={handleSubmit}>
-            <label>Nom de la spécialité</label>
+            <label htmlFor="specialite-nom">Nom de la spécialité</label>
             <input
+            id="specialite-nom"
             type="text"
             name="nom"
             value={form.nom}
@@ -30,10 +31,11 @@ export default function AdminSpecialiteForm({ specialite, categories, onSubmit, 
             required
             />
 
-            <label>Catégorie associée</label>
+            <label htmlFor="specialite-categorie">Catégorie associée</label>
             <select
-            name="categorieId"
-            value={form.categorieId}
+            id="specialite-categorie"
+            name="categorie_id"
+            value={form.categorie_id}
             onChange={handleChange}
             required
             >

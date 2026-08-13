@@ -65,11 +65,21 @@ export default function ContactPage() {
 
             {!sent ? (
                 <form onSubmit={handleSubmit}>
-                    <input type="text" name="nom" placeholder="Votre nom" required />
-                    <input type="text" name="prenom" placeholder="Votre prénom" />
-                    <input type="tel" name="telephone" placeholder="Votre téléphone" />
-                    <input type="email" name="email" placeholder="Votre email" required />
-                    <textarea name="message" placeholder="Votre message" rows="5" required />
+                    <label htmlFor="contact-nom" className="sr-only">Votre nom</label>
+                    <input id="contact-nom" type="text" name="nom" placeholder="Votre nom" required />
+
+                    <label htmlFor="contact-prenom" className="sr-only">Votre prénom</label>
+                    <input id="contact-prenom" type="text" name="prenom" placeholder="Votre prénom" />
+
+                    <label htmlFor="contact-telephone" className="sr-only">Votre téléphone</label>
+                    <input id="contact-telephone" type="tel" name="telephone" placeholder="Votre téléphone" />
+
+                    <label htmlFor="contact-email" className="sr-only">Votre email</label>
+                    <input id="contact-email" type="email" name="email" placeholder="Votre email" required />
+
+                    <label htmlFor="contact-message" className="sr-only">Votre message</label>
+                    <textarea id="contact-message" name="message" placeholder="Votre message" rows="5" required />
+
                     <button type="submit">Envoyer</button>
                 </form>
             ) : (

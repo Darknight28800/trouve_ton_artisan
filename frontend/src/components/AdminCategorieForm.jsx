@@ -20,8 +20,9 @@ export default function AdminCategorieForm({ categorie, onSubmit, onCancel }) {
         <h2>{categorie ? "Modifier la catégorie" : "Ajouter une catégorie"}</h2>
 
         <form onSubmit={handleSubmit}>
-            <label>Nom de la catégorie</label>
+            <label htmlFor="categorie-nom">Nom de la catégorie</label>
             <input
+            id="categorie-nom"
             type="text"
             name="nom"
             value={form.nom}

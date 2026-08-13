@@ -24,12 +24,12 @@ router.get("/:id", async (req, res) => {
 // 🟥 ROUTES ADMIN (sécurisées)
 router.post("/", verifyToken, isAdmin, async (req, res) => {
     try {
-        const { nom, categorieId } = req.body;
+        const { nom, categorie_id } = req.body;
 
-        if (!nom || !categorieId)
+        if (!nom || !categorie_id)
             return res.status(400).json({ error: "Champs requis" });
 
-        const specialite = await Specialite.create({ nom, categorieId });
+        const specialite = await Specialite.create({ nom, categorie_id });
 
         res.status(201).json(specialite);
     } catch (error) {
@@ -43,7 +43,7 @@ router.put("/:id", verifyToken, isAdmin, async (req, res) => {
         if (!specialite) return res.status(404).json({ error: "Introuvable" });
 
         specialite.nom = req.body.nom;
-        specialite.categorieId = req.body.categorieId;
+        specialite.categorie_id = req.body.categorie_id;
 
         await specialite.save();
 

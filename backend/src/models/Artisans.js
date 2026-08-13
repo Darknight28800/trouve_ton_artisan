@@ -31,6 +31,10 @@ export default (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true
         },
+        telephone: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         site_web: {
             type: DataTypes.STRING,
             allowNull: true

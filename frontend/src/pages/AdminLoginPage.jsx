@@ -9,7 +9,8 @@ export default function AdminLoginPage() {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = async () => {
+    const handleLogin = async (e) => {
+        e.preventDefault();
         setError("");
 
         try {
@@ -36,25 +37,31 @@ export default function AdminLoginPage() {
             <div className="admin-login">
                 <h1>Connexion Admin</h1>
 
-            <div className="login-box">
+            <form className="login-box" onSubmit={handleLogin}>
+                <label htmlFor="login-email">Email admin</label>
                 <input
+                    id="login-email"
                     type="email"
                     placeholder="Email admin"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                 />
 
+                <label htmlFor="login-password">Mot de passe</label>
                 <input
+                    id="login-password"
                     type="password"
                     placeholder="Mot de passe"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
 
                 {error && <p className="error">{error}</p>}
 
-                <button onClick={handleLogin}>Se connecter</button>
-            </div>
+                <button type="submit">Se connecter</button>
+            </form>
         </div>
     );
 }

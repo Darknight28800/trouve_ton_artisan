@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from "express";
 import cors from "cors";
+import helmet from "helmet";
 import { sequelize } from "./models/index.js";
 
 const requiredEnvVars = ["DB_HOST", "DB_USER", "DB_NAME", "DB_DIALECT", "JWT_SECRET"];
@@ -18,7 +19,10 @@ sequelize.sync({ alter: true })
     .catch(err => console.error(err));
 
 const app = express();
-app.use(cors());
+app.use(helmet());
+app.use(cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:5173"
+}));
 app.use(express.json());
 
 // ------------------------------

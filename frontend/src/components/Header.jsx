@@ -37,7 +37,9 @@ export default function Header() {
 
             {/* Barre de recherche */}
             <div className="header_search">
+                <label htmlFor="header-search-artisan" className="sr-only">Rechercher un artisan</label>
                 <input
+                    id="header-search-artisan"
                     type="text"
                     placeholder="Rechercher un artisan..."
                     value={search}

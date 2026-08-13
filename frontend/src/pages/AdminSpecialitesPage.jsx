@@ -65,7 +65,7 @@ export default function AdminSpecialitesPage() {
 
         {showForm && (
             <div className="modal-overlay" onClick={() => setShowForm(false)}>
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
                 <AdminSpecialiteForm
                 specialite={specialiteToEdit}
                 categories={categories}

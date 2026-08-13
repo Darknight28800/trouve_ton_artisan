@@ -8,7 +8,7 @@ export default function AdminArtisanForm({ artisan, onSubmit, onCancel }) {
         nom: artisan?.nom || "",
         email: artisan?.email || "",
         telephone: artisan?.telephone || "",
-        specialiteId: artisan?.specialiteId || "",
+        specialite_id: artisan?.specialite_id || "",
     });
 
     const [specialites, setSpecialites] = useState([]);
@@ -34,8 +34,9 @@ export default function AdminArtisanForm({ artisan, onSubmit, onCancel }) {
         <h2>{artisan ? "Modifier l'artisan" : "Ajouter un artisan"}</h2>
 
         <form onSubmit={handleSubmit}>
-            <label>Nom</label>
+            <label htmlFor="artisan-nom">Nom</label>
             <input
+            id="artisan-nom"
             type="text"
             name="nom"
             value={form.nom}
@@ -43,8 +44,9 @@ export default function AdminArtisanForm({ artisan, onSubmit, onCancel }) {
             required
             />
 
-            <label>Email</label>
+            <label htmlFor="artisan-email">Email</label>
             <input
+            id="artisan-email"
             type="email"
             name="email"
             value={form.email}
@@ -52,8 +54,9 @@ export default function AdminArtisanForm({ artisan, onSubmit, onCancel }) {
             required
             />
 
-            <label>Téléphone</label>
+            <label htmlFor="artisan-telephone">Téléphone</label>
             <input
+            id="artisan-telephone"
             type="text"
             name="telephone"
             value={form.telephone}
@@ -61,10 +64,11 @@ export default function AdminArtisanForm({ artisan, onSubmit, onCancel }) {
             required
             />
 
-            <label>Spécialité</label>
+            <label htmlFor="artisan-specialite">Spécialité</label>
             <select
-            name="specialiteId"
-            value={form.specialiteId}
+            id="artisan-specialite"
+            name="specialite_id"
+            value={form.specialite_id}
             onChange={handleChange}
             required
             >

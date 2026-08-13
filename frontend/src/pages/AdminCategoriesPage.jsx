@@ -60,7 +60,7 @@ export default function AdminCategoriesPage() {
 
         {showForm && (
             <div className="modal-overlay" onClick={() => setShowForm(false)}>
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
                 <AdminCategorieForm
                 categorie={categorieToEdit}
                 onSubmit={handleSave}

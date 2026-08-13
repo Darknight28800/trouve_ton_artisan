@@ -21,6 +21,7 @@ CREATE TABLE artisan (
     a_propos TEXT,
     description TEXT,
     email VARCHAR(255),
+    telephone VARCHAR(255),
     site_web VARCHAR(255),
     top BOOLEAN DEFAULT FALSE,
     image VARCHAR(255),

@@ -41,7 +41,7 @@ export default function AdminMessages() {
                     <div className="messages-list">
                         {messages.map((m) => (
                             <div className="message-card" key={m.id}>
-                                <div className="header">
+                                <div className="card-header">
                                     <h2>{m.nom} {m.prenom}</h2>
                                     <span className="date">
                                         {new Date(m.createdAt).toLocaleString()}
@@ -80,7 +80,7 @@ export default function AdminMessages() {
 
                 {selectedMessage && (
                     <div className="modal-overlay" onClick={() => setSelectedMessage(null)}>
-                        <div className="modal" onClick={(e) => e.stopPropagation()}>
+                        <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
                             <h2>{selectedMessage.nom} {selectedMessage.prenom}</h2>
 
                             <p><strong>Email :</strong> {selectedMessage.email}</p>
