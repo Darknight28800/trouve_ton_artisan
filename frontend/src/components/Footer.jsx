@@ -10,7 +10,6 @@ export default function Footer() {
                 <Link to="/cookies">Cookies</Link>
             </p>
             <p className="site-footer-info">
-                11 bis hameau de Dommarville<br />
                 28800 Sancheville<br />
                 France<br />
                 +33 6 58 16 86 89
