@@ -18,7 +18,7 @@
         display: block;
         font-size: 72px;
         font-weight: 800;
-        background: linear-gradient(135deg, #f0abfc, #93c5fd);
+        background: $brand-text-gradient;
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -47,6 +47,7 @@
 
         &:hover {
             filter: brightness(1.1);
+            box-shadow: 0 4px 20px rgba(34, 211, 238, 0.4);
         }
     }
 }

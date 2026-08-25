@@ -5,26 +5,84 @@ $dark: #333;
 $radius: 8px;
 
 /* =========================
-   IDENTITÉ VISUELLE PUBLIQUE (dégradé violet/bleu + glassmorphism)
+   IDENTITÉ VISUELLE PUBLIQUE (bleu nuit + cyan électrique, glassmorphism premium)
    L'espace admin garde l'ancienne palette ($primary bleu ci-dessus).
 ========================= */
-$brand-violet: #7c3aed;
-$brand-indigo: #4338ca;
-$brand-pink: #ec4899;
-$brand-bg-gradient: linear-gradient(160deg, #5b21b6 0%, #4c1d95 22%, #3730a3 55%, #1e3a8a 100%);
-$brand-accent-gradient: linear-gradient(135deg, $brand-violet, $brand-indigo);
+$brand-cyan: #22d3ee;
+$brand-cyan-pale: #a5f3fc;
+$brand-blue: #3b82f6;
+$brand-blue-deep: #1d4ed8;
+$brand-bg-gradient: linear-gradient(165deg, #04050a 0%, #060a14 25%, #0a1424 55%, #0a1730 80%, #071022 100%);
+$brand-accent-gradient: linear-gradient(135deg, $brand-cyan, $brand-blue);
+$brand-text-gradient: linear-gradient(135deg, #d9faff, $brand-cyan-pale, $brand-blue);
 
-$glass-bg: rgba(255, 255, 255, 0.1);
-$glass-bg-strong: rgba(255, 255, 255, 0.16);
-$glass-border: rgba(255, 255, 255, 0.22);
+$glass-bg: rgba(150, 210, 255, 0.055);
+$glass-bg-strong: rgba(150, 210, 255, 0.1);
+$glass-border: rgba(160, 220, 255, 0.16);
+$glass-border-bright: rgba(180, 240, 255, 0.55);
 $glass-blur: 18px;
 
 // Fond translucide "verre" sans flou : utilisé sur les cards répétées (nombreuses
 // instances sur une page), où empiler des dizaines de calques backdrop-filter
 // dégraderait les performances/le rendu. Le flou est réservé aux éléments uniques
 // qui passent au-dessus de contenu qui défile (header, footer : voir header.scss).
+//
+// Effet "vitre" premium : un reflet diagonal (::before) simule la lumière qui
+// glisse sur du verre, + un liseré interne clair en haut (inset box-shadow)
+// simule le bord du verre qui accroche la lumière.
 @mixin glass-panel($bg: $glass-bg) {
+    position: relative;
     background: $bg;
     border: 1px solid $glass-border;
     border-radius: 18px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 0 40px rgba(56, 189, 248, 0.04),
+        0 10px 30px rgba(0, 0, 0, 0.35);
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 30%, transparent 55%);
+        pointer-events: none;
+    }
+}
+
+// Anneau lumineux animé (bordure qui scintille) — réservé au survol/focus pour
+// ne pas faire tourner une animation sur des dizaines de cartes en même temps.
+// (déclaration @property + @keyframes globales dans global.scss, pour ne pas
+// dupliquer ces règles CSS dans chaque fichier qui importe ce partial)
+@mixin shimmer-ring() {
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: -1.5px;
+        border-radius: inherit;
+        padding: 1.5px;
+        background: conic-gradient(
+            from var(--glow-angle),
+            transparent 0%,
+            $brand-cyan 12%,
+            $brand-blue 24%,
+            transparent 40%,
+            transparent 100%
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 2;
+        transition: opacity 0.35s ease;
+    }
+
+    &:hover::after,
+    &:focus-within::after {
+        opacity: 1;
+        animation: glow-spin 2.6s linear infinite;
+    }
 }

@@ -1,5 +1,19 @@
 @import "./variables";
 
+/* Enregistrement de la variable animable pour l'anneau lumineux (shimmer-ring,
+   voir variables.scss) — déclaré ici une seule fois pour tout le CSS compilé. */
+@property --glow-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes glow-spin {
+    to {
+        --glow-angle: 360deg;
+    }
+}
+
 @import "./pages/home";
 @import "./pages/artisans";
 @import "./pages/artisan";
@@ -68,37 +82,49 @@ body {
 /* =========================
    THÈME PUBLIC (fond dégradé + halos) — n'affecte pas l'espace admin
 ========================= */
+html {
+    background: #04050a;
+}
+
 body.public-theme {
     background: $brand-bg-gradient;
-    background-attachment: fixed;
+    /* Pas de background-attachment: fixed ici : sur un body plus haut que le
+       viewport, ça limite le rendu du dégradé à la hauteur d'un écran et
+       laisse la page blanche par défaut en dessous. Les halos (::before/
+       ::after, .halo-drift) sont déjà en position:fixed, donc l'effet
+       "arrière-plan qui reste en place au scroll" est préservé sans ça. */
     min-height: 100vh;
     position: relative;
     color: #fff;
+    overflow-x: hidden;
 
+    /* Halos ambiants : ::before/::after = grands halos fixes (cyan/bleu),
+       .halo-drift = un 3e halo plus petit qui dérive lentement pour donner
+       une impression de profondeur/mouvement sans gêner la lecture. */
     &::before,
     &::after {
         content: "";
         position: fixed;
         border-radius: 50%;
-        filter: blur(80px);
+        filter: blur(90px);
         pointer-events: none;
         z-index: 0;
     }
 
     &::before {
-        width: 480px;
-        height: 480px;
-        top: -120px;
-        left: -100px;
-        background: rgba(236, 72, 153, 0.35);
+        width: 560px;
+        height: 560px;
+        top: -160px;
+        left: -140px;
+        background: rgba(34, 211, 238, 0.28);
     }
 
     &::after {
-        width: 520px;
-        height: 520px;
-        bottom: -160px;
-        right: -120px;
-        background: rgba(59, 130, 246, 0.3);
+        width: 620px;
+        height: 620px;
+        bottom: -200px;
+        right: -160px;
+        background: rgba(59, 130, 246, 0.32);
     }
 
     h1, h2, h3 {
@@ -106,22 +132,41 @@ body.public-theme {
     }
 }
 
+.halo-drift {
+    position: fixed;
+    top: 30%;
+    left: 55%;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(125, 211, 252, 0.22) 0%, transparent 70%);
+    filter: blur(70px);
+    pointer-events: none;
+    z-index: 0;
+    animation: halo-float 16s ease-in-out infinite;
+}
+
+@keyframes halo-float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-60px, 40px) scale(1.12); }
+}
+
 /* Page catégorie : le fond entier reprend la teinte de la catégorie
    consultée (--cat-accent / --cat-accent2 posées sur <body> par CategoriePage). */
 body.public-theme.category-theme {
     background: linear-gradient(
         160deg,
-        color-mix(in srgb, var(--cat-accent) 55%, #1e1b3a) 0%,
-        color-mix(in srgb, var(--cat-accent2) 55%, #1e1b3a) 60%,
-        #1e1b3a 100%
+        color-mix(in srgb, var(--cat-accent) 45%, #060a14) 0%,
+        color-mix(in srgb, var(--cat-accent2) 45%, #060a14) 60%,
+        #060a14 100%
     );
 
     &::before {
-        background: color-mix(in srgb, var(--cat-accent) 45%, transparent);
+        background: color-mix(in srgb, var(--cat-accent) 40%, transparent);
     }
 
     &::after {
-        background: color-mix(in srgb, var(--cat-accent2) 40%, transparent);
+        background: color-mix(in srgb, var(--cat-accent2) 35%, transparent);
     }
 }
 

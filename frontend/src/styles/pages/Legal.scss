@@ -33,10 +33,11 @@
     }
 
     a {
-        color: #93c5fd;
+        color: $brand-cyan-pale;
 
         &:hover {
             color: #dbeafe;
+            text-shadow: 0 0 12px rgba(34, 211, 238, 0.5);
         }
     }
 

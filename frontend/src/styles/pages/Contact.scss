@@ -30,6 +30,7 @@
     /* FORMULAIRE */
     form {
         @include glass-panel();
+        @include shimmer-ring();
         padding: 28px;
         display: flex;
         flex-direction: column;
@@ -46,8 +47,8 @@
             transition: 0.2s ease;
 
             &:focus {
-                border-color: white;
-                box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+                border-color: $brand-cyan;
+                box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.3);
                 outline: none;
             }
         }
@@ -71,6 +72,7 @@
             &:hover {
                 filter: brightness(1.1);
                 transform: translateY(-2px);
+                box-shadow: 0 8px 24px rgba(34, 211, 238, 0.4);
             }
 
             &:active {

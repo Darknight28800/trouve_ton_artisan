@@ -15,7 +15,7 @@
         margin-bottom: 12px;
 
         strong {
-            background: linear-gradient(135deg, #f0abfc, #93c5fd);
+            background: $brand-text-gradient;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -30,6 +30,7 @@
 }
 
 .hero-search {
+    @include shimmer-ring();
     display: flex;
     gap: 10px;
     align-items: center;
@@ -146,7 +147,7 @@
             display: inline-block;
             padding: 12px 28px;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.14);
+            background: rgba(150, 210, 255, 0.1);
             border: 1px solid $glass-border;
             color: white;
             text-decoration: none;
@@ -154,7 +155,9 @@
             transition: 0.2s;
 
             &:hover {
-                background: rgba(255, 255, 255, 0.24);
+                background: rgba(150, 210, 255, 0.18);
+                border-color: $glass-border-bright;
+                box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
             }
         }
     }
@@ -245,6 +248,7 @@
 }
 
 .categorie-card-content {
+    position: relative;
     background: linear-gradient(135deg, color-mix(in srgb, var(--cat-accent) 35%, transparent), color-mix(in srgb, var(--cat-accent2) 35%, transparent));
     border: 1px solid color-mix(in srgb, var(--cat-accent) 55%, white 20%);
     border-radius: 18px;
@@ -252,11 +256,12 @@
     text-align: center;
     font-weight: 600;
     color: white;
-    transition: 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 
     &:hover {
         background: linear-gradient(135deg, color-mix(in srgb, var(--cat-accent) 50%, transparent), color-mix(in srgb, var(--cat-accent2) 50%, transparent));
         transform: translateY(-2px);
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--cat-accent) 35%, transparent);
     }
 }
 

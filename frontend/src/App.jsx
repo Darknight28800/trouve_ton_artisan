@@ -44,6 +44,7 @@ function AppShell() {
 
   return (
     <div className="page-shell">
+      {!isAdmin && <div className="halo-drift" aria-hidden="true" />}
       {!isAdmin && <Header />}
 
       <main className="page-content">

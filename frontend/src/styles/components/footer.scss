@@ -1,16 +1,27 @@
 @import "../variables";
 
 .site-footer {
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur($glass-blur);
-    -webkit-backdrop-filter: blur($glass-blur);
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(4, 8, 18, 0.45);
+    backdrop-filter: blur($glass-blur) saturate(140%);
+    -webkit-backdrop-filter: blur($glass-blur) saturate(140%);
+    border-top: 1px solid rgba(160, 220, 255, 0.12);
     color: white;
     padding: 30px 20px;
     margin-top: 60px;
     text-align: center;
     position: relative;
     z-index: 1;
+
+    /* Liseré du haut en dégradé, symétrique à celui du header */
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -1px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.5), rgba(59, 130, 246, 0.4), transparent);
+    }
 
     a {
         color: white;
@@ -22,6 +33,7 @@
         &:hover {
             opacity: 1;
             text-decoration: underline;
+            text-shadow: 0 0 12px rgba(34, 211, 238, 0.5);
         }
     }
 
